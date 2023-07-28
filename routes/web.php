@@ -28,4 +28,3 @@ Route::get('/balita', function () {
 Route::get('/penimbangan', function () {
     return view('penimbangan');
 })->name('penimbangan');
-
