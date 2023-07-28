@@ -499,11 +499,3 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    @parent
-    <script>
-        $(document).ready(function() {
-            $('#basic-datatables').DataTable();
-        });
-    </script>
-@endsection
