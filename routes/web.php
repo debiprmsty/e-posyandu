@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DusunController;
+use App\Http\Controllers\OrangTuaController;
+use App\Http\Controllers\BalitaController;
+use App\Http\Controllers\PenimbanganController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,15 +20,49 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 })->name('home');
-Route::get('/dusun', function () {
-    return view('dusun');
-})->name('dusun');
-Route::get('/orangtua', function () {
-    return view('orangtua');
-})->name('orangtua');
-Route::get('/balita', function () {
-    return view('balita');
-})->name('balita');
-Route::get('/penimbangan', function () {
-    return view('penimbangan');
-})->name('penimbangan');
+
+
+Route::prefix('/dusun')->group(function () {
+    Route::get('/',[DusunController::class,'index'])->name('dusun.index');
+    Route::post('/',[DusunController::class,'store'])->name('dusun.tambah');
+    Route::post('/edit',[DusunController::class,'update'])->name('dusun.edit');
+    Route::get('/delete/{id}',[DusunController::class,'destroy'])->name('dusun.delete');
+});
+
+
+Route::prefix('/orangtua')->group(function () {
+    Route::get('/',[OrangTuaController::class,'index'])->name('ortu.index');
+    Route::get('/dusun/{id}',[OrangTuaController::class,'getDusun'])->name('ortu.dusun');
+    Route::post('/',[OrangTuaController::class,'store'])->name('ortu.tambah');
+    Route::post('/edit',[OrangTuaController::class,'update'])->name('ortu.edit');
+    Route::get('/delete/{id}',[OrangTuaController::class,'destroy'])->name('ortu.delete');
+});
+
+Route::prefix('/balita')->group(function () {
+    Route::get('/',[BalitaController::class,'index'])->name('balita.index');
+    Route::get('/ortu',[BalitaController::class,'getDataOrtu'])->name('balita.ortu');
+    Route::get('/dusun-ortu/{id}',[BalitaController::class,'getDusunOrtu'])->name('balita.dusun.ortu');
+    Route::post('/',[BalitaController::class,'store'])->name('balita.tambah');
+    Route::post('/edit',[BalitaController::class,'update'])->name('balita.edit');
+    Route::get('/delete/{id}',[BalitaController::class,'destroy'])->name('balita.delete');
+});
+
+Route::prefix('/penimbangan')->group(function () {
+    Route::get('/',[PenimbanganController::class,'index'])->name('penimbangan.index');
+    Route::post('/',[PenimbanganController::class,'store'])->name('penimbangan.tambah');
+    Route::post('/edit',[PenimbanganController::class,'update'])->name('penimbangan.edit');
+    Route::get('/delete/{id}',[PenimbanganController::class,'destroy'])->name('penimbangan.delete');
+});
+
+// Route::get('/dusun', function () {
+//     return view('dusun');
+// })->name('dusun');
+// Route::get('/orangtua', function () {
+//     return view('orangtua');
+// })->name('orangtua');
+// Route::get('/balita', function () {
+//     return view('balita');
+// })->name('balita');
+// Route::get('/penimbangan', function () {
+//     return view('penimbangan');
+// })->name('penimbangan');

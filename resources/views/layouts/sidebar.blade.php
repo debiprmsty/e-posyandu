@@ -45,7 +45,7 @@
                 </li>
                 <li class="nav-item {{Request::is('dusun')? 'active':''}}">
                     <a href='/dusun'>
-                        <i class="fas fa-map-pin"></i>
+                        <i class="fas fa-map-marker-alt"></i>
                         <p>Data Dusun</p>
                     </a>
                 </li>
