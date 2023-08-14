@@ -5,6 +5,7 @@ use App\Http\Controllers\DusunController;
 use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\BalitaController;
 use App\Http\Controllers\PenimbanganController;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,9 +50,17 @@ Route::prefix('/balita')->group(function () {
 
 Route::prefix('/penimbangan')->group(function () {
     Route::get('/',[PenimbanganController::class,'index'])->name('penimbangan.index');
+    Route::get('/form/{id}',[PenimbanganController::class,'form'])->name('penimbangan.form');
+    Route::post('/dusun',[PenimbanganController::class,'showByDusun'])->name('penimbangan.dusun');
     Route::post('/',[PenimbanganController::class,'store'])->name('penimbangan.tambah');
     Route::post('/edit',[PenimbanganController::class,'update'])->name('penimbangan.edit');
     Route::get('/delete/{id}',[PenimbanganController::class,'destroy'])->name('penimbangan.delete');
+});
+
+Route::prefix('/timbangan-form')->group(function () {
+    Route::get('/{id}',[FormController::class,'store'])->name('form.index');
+    // Route::post('/',[FormController::class,'tambah'])->name('form.add');
+    Route::get('/balita',[FormController::class,'tambah'])->name('form.tambah');
 });
 
 // Route::get('/dusun', function () {

@@ -56,22 +56,22 @@
                             <table id="add-row" class="display table table-striped table-hover" >
                                 <thead>
                                     <tr>
-                                        <th>Nomor</th>
+                                        <th class="text-center">Nomor</th>
                                         <th>Nama Dusun</th>
-                                        <th style="width: 10%">Aksi</th>
+                                        <th style="width: 10%" class="text-center">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Nomor</th>
+                                        <th class="text-center">Nomor</th>
                                         <th>Nama Dusun</th>
-                                        <th>Aksi</th>
+                                        <th class="text-center">Aksi</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     @foreach ($data as $index => $dusun)
                                     <tr>
-                                        <td>{{ $index + 1 }}</td>
+                                        <td class="text-center">{{ $index + 1 }}</td>
                                         <td>{{ $dusun->nama_dusun }}</td>
                                         <td>
                                             <div class="form-button-action">

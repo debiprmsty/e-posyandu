@@ -61,7 +61,7 @@
                         <p>Data Balita</p>
                     </a>
                 </li>
-                <li class="nav-item {{Request::is('penimbangan')? 'active':''}}">
+                <li class="nav-item {{Request::is('penimbangan') ? 'active':''}}">
                     <a href='/penimbangan'>
                         <i class="fas fa-balance-scale"></i>
                         <p>Data Penimbangan Balita</p>
