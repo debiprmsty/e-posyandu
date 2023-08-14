@@ -14,9 +14,9 @@ class PenimbanganController extends Controller
      */
     public function index()
     {
-        $data = Penimbangan::with(['dusun','balita','keterangan'])->get();
+        $data = Penimbangan::with(['dusun', 'balita', 'keterangan'])->get();
         $dataDusun = Dusun::all();
-        return view('penimbangan',compact('data','dataDusun'));
+        return view('penimbangan', compact('data', 'dataDusun'));
     }
 
     /**
@@ -38,22 +38,24 @@ class PenimbanganController extends Controller
     /**
      * Display the specified resource.
      */
-    public function showByDusun(Request $request,Penimbangan $penimbangan)
+    public function showByDusun(Request $request, Penimbangan $penimbangan)
     {
         $idDusun = $request->input('id_dusun');
         $tambahSiap = true;
         $judulSiap = true;
-        if($idDusun == 0) {
-            $data = Penimbangan::with(['dusun','balita','keterangan'])->get();
+        if ($idDusun == 0) {
+            $data = Penimbangan::with(['dusun', 'balita', 'keterangan'])->get();
             $dataDusun = Dusun::all();
             $judulSiap = false;
-        }else {
+        } else {
             $dataDusun = Dusun::all();
-            $data = Penimbangan::with(['dusun','balita','keterangan'])->where('id_dusun','=',$idDusun)->get();
+            $data = Penimbangan::with(['dusun', 'balita', 'keterangan'])->where('id_dusun', '=', $idDusun)->get();
         }
-        
-        return view('penimbangan',compact('data', 'dataDusun','tambahSiap','judulSiap','idDusun'));
+
+        return view('penimbangan', compact('data', 'dataDusun', 'tambahSiap', 'judulSiap', 'idDusun'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -63,7 +65,8 @@ class PenimbanganController extends Controller
         //
     }
 
-    public function form($id) {
+    public function form($id)
+    {
         return view('formpenimbangan');
     }
 
@@ -78,8 +81,11 @@ class PenimbanganController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Penimbangan $penimbangan)
+    public function destroy(Penimbangan $penimbangan, $id)
     {
-        //
+        $data = Penimbangan::find($id);
+        $data->delete();
+
+        return redirect()->route('penimbangan.index')->with('success', 'Data Penimbangan berhasil dihapus.');
     }
 }
