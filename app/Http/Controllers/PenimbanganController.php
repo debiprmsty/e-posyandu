@@ -6,6 +6,9 @@ use App\Models\Penimbangan;
 use App\Models\Dusun;
 use Illuminate\Http\Request;
 use App\Http\Resources\PenimbanganResource;
+use App\Exports\PenimbanganExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class PenimbanganController extends Controller
 {
@@ -17,6 +20,15 @@ class PenimbanganController extends Controller
         $data = Penimbangan::with(['dusun', 'balita', 'keterangan'])->get();
         $dataDusun = Dusun::all();
         return view('penimbangan', compact('data', 'dataDusun'));
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $id_dusun = $request->input('id_dusun');
+        $tgl_awal = $request->input('tgl_awal');
+        $tgl_akhir = $request->input('tgl_akhir');
+
+        return (new PenimbanganExport($id_dusun, $tgl_awal, $tgl_akhir))->download('laporan-' . Carbon::now()->timestamp . '.' . 'xls');
     }
 
     /**
@@ -51,6 +63,7 @@ class PenimbanganController extends Controller
             $dataDusun = Dusun::all();
             $data = Penimbangan::with(['dusun', 'balita', 'keterangan'])->where('id_dusun', '=', $idDusun)->get();
         }
+
 
         return view('penimbangan', compact('data', 'dataDusun', 'tambahSiap', 'judulSiap', 'idDusun'));
     }

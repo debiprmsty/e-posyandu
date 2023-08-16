@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Dusun;
 use App\Models\Balita;
 use App\Models\Penimbangan;
+use Carbon\Carbon;
 
 class FormController extends Controller
 {
@@ -50,26 +51,35 @@ class FormController extends Controller
 
         $beratBadanTerbaru = $request->input('berat_badan');
         $tinggiBadanBaru = $request->input('tinggi_badan');
+        $tglBaru = $request->input('tgl_timbangan');
+        $tglSebelum = $penimbanganData->first()->tgl_timbangan;
+
+        // Mengonversi string tanggal ke objek DateTime
+        $tanggalBaru = Carbon::createFromFormat('Y-m-d', $tglBaru);
+        $tanggalSebelum = Carbon::createFromFormat('Y-m-d', $tglSebelum);
+
+        $selisihHari = $tanggalBaru->diffInDays($tanggalSebelum);
 
         $beratBadanSebelum = $penimbanganData->first()->berat_badan;
-        $tinggiSebelum = $penimbanganData->first()->tinggi_badan;
+        // $pemula = count($beratBadanSebelum);
         $beratBadanSesudah = $beratBadanTerbaru;
 
         // Lakukan perbandingan dan ubah id_keterangan sesuai kondisi
-        if ($beratBadanSesudah > $beratBadanSebelum) {
-            $idKeterangan = 1;
+        if ($selisihHari > 31) {
+            $idKeterangan = 4;
         } else if ($beratBadanSesudah == $beratBadanSebelum) {
             $idKeterangan = 3;
-        } else if ($beratBadanTerbaru == 0 && $tinggiBadanBaru == 0) {
-            $idKeterangan = 4;
+        } else if ($beratBadanSesudah > $beratBadanSebelum) {
+            $idKeterangan = 1;
         } else if ($beratBadanSesudah < $beratBadanSebelum) {
             $idKeterangan = 2;
         }
 
+
         $timbangan = new Penimbangan();
         $timbangan->id_dusun = $id_dusun;
         $timbangan->id_balita = $request->input('id_balita');
-        $timbangan->tgl_timbangan = $request->input('tgl_timbangan');
+        $timbangan->tgl_timbangan = $tglBaru;
         $timbangan->berat_badan = $beratBadanSesudah;
         $timbangan->tinggi_badan = $tinggiBadanBaru;
         $timbangan->id_keterangan = $idKeterangan;
@@ -135,35 +145,48 @@ class FormController extends Controller
         // Urutkan data penimbangan berdasarkan tgl_timbangan secara manual
         $penimbanganData = $penimbanganData->sortByDesc('tgl_timbangan');
 
+
         $beratBadanTerbaru = $request->input('berat_badan');
         $tinggiBadanBaru = $request->input('tinggi_badan');
+        $tglBaru = $request->input('tgl_timbangan');
+        $duaDataTerakhir = $penimbanganData->take(2);
+        $tglSebelum = $penimbanganData[2]->tgl_timbangan;
 
-        $beratBadanSebelum = $penimbanganData->first()->berat_badan;
-        $tinggiSebelum = $penimbanganData->first()->tinggi_badan;
+
+
+        // Mengonversi string tanggal ke objek DateTime
+        $tanggalBaru = Carbon::createFromFormat('Y-m-d', $tglBaru);
+        $tanggalSebelum = Carbon::createFromFormat('Y-m-d', $tglSebelum);
+
+        $selisihHari = $tanggalBaru->diffInDays($tanggalSebelum);
+
+        $beratBadanSebelum = $penimbanganData[2]->berat_badan;
+        // $pemula = count($beratBadanSebelum);
         $beratBadanSesudah = $beratBadanTerbaru;
 
         // Lakukan perbandingan dan ubah id_keterangan sesuai kondisi
-        if ($beratBadanSesudah > $beratBadanSebelum) {
+        if ($selisihHari == 0 || $selisihHari > 31) {
+            $idKeterangan = 4;
+        } else if ($beratBadanSesudah > $beratBadanSebelum) {
             $idKeterangan = 1;
         } else if ($beratBadanSesudah == $beratBadanSebelum) {
             $idKeterangan = 3;
-        } else if ($beratBadanTerbaru == 0 && $tinggiBadanBaru == 0) {
-            $idKeterangan = 4;
         } else if ($beratBadanSesudah < $beratBadanSebelum) {
             $idKeterangan = 2;
         }
 
+
         $timbangan = Penimbangan::find($id_penimbangan);
         $timbangan->id_dusun = $id_dusun;
-        $timbangan->id_balita = $id_balita;
-        $timbangan->tgl_timbangan = $request->input('tgl_timbangan');
+        $timbangan->id_balita = $request->input('id_balita');
+        $timbangan->tgl_timbangan = $tglBaru;
         $timbangan->berat_badan = $beratBadanSesudah;
         $timbangan->tinggi_badan = $tinggiBadanBaru;
         $timbangan->id_keterangan = $idKeterangan;
 
         $timbangan->save();
 
-        return redirect()->route('penimbangan.index')->with('success', 'Data berhasil diupdate');
+        return redirect()->route('penimbangan.index')->with('success', 'Data berhasil update');
     }
 
     /**

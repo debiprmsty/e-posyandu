@@ -68,6 +68,10 @@ Route::prefix('/update-timbangan')->group(function () {
     Route::post('/new', [FormController::class, 'update'])->name('form.update');
 });
 
+Route::prefix('/export')->group(function () {
+    Route::post('/penimbangan', [PenimbanganController::class, 'exportExcel'])->name('penimbangan.export');
+});
+
 // Route::get('/dusun', function () {
 //     return view('dusun');
 // })->name('dusun');

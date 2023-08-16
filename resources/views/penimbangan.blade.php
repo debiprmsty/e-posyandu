@@ -10,7 +10,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6 col-12">
-                                @if (isset($judulSiap) === true)
+                                @if (isset($judulSiap) === true && isset($data))
                                     <h4 class="card-title"> Tabel Penimbangan {{ $data[0]->dusun->nama_dusun }}</h4>
                                 @else
                                     <h4 class="card-title">Tabel Penimbangan Balita</h4>
@@ -39,67 +39,20 @@
                                     <i class="fa fa-map-pin mr-2"></i>
                                     Pilih Dusun
                                 </button>
+                                <button data-toggle="modal" data-target="#exportModal"
+                                    class="btn btn-success btn-round btn-sm d-block d-md-none ml-2">
+                                    <i class="fa fa-file-text mr-2"></i>
+                                    Export Excel
+                                </button>
+                                <button data-toggle="modal" data-target="#exportModal"
+                                    class="btn btn-success btn-round btn-md d-none d-md-block ml-2">
+                                    <i class="fa fa-file-text mr-2"></i>
+                                    Export Excel
+                                </button>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <!-- Modal Tambah -->
-                        <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header no-bd">
-                                        <h3 class="modal-title">
-                                            <span class="fw-bold">
-                                                Tambah Data Timbangan</span>
-                                        </h3>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlSelect1">Pilih Nama Balita</label>
-                                                        <select class="form-control" id="exampleFormControlSelect1">
-                                                            <option>Cantika Maharani</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlSelect1">Pilih Nama Bulan</label>
-                                                        <select class="form-control" id="exampleFormControlSelect1">
-                                                            <option>Januari</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="beratbadan">Berat Badan Balita</label>
-                                                        <input type="number" min="0" class="form-control"
-                                                            id="beratbadan" placeholder="Masukkan Berat Badan Balita">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="tinggibadan">Tinggi Badan Balita</label>
-                                                        <input type="number" min="0" class="form-control"
-                                                            id="tinggibadan" placeholder="Masukkan Tinggi Badan Balita">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlSelect1">Keterangan</label>
-                                                        <select class="form-control" id="exampleFormControlSelect1">
-                                                            <option>T</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer no-bd">
-                                        <button type="submit" class="btn btn-primary">Tambah</button>
-                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="table-responsive">
                             <table id="add-row" class="display table table-striped table-hover">
                                 <thead>
@@ -138,7 +91,7 @@
                                             <td class="text-center">{{ $dt->keterangan->label_keterangan }}</td>
                                             <td>
                                                 <div class="form-button-action">
-                                                    <a href="{{ route('form.show', ['id' => $dt->id_balita]) }}"
+                                                    <a href="{{ route('form.show', ['id' => $dt->id]) }}"
                                                         class="btn btn-link btn-primary">
                                                         <span class="btn-label">
                                                             <i class="fa fa-edit"></i>
@@ -197,6 +150,54 @@
                 </div>
                 <div class="modal-footer no-bd">
                     <button type="submit" class="btn btn-primary">Pilih</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exportModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header no-bd">
+                    <h3 class="modal-title">
+                        <span class="fw-bold">
+                            Form Laporan</span>
+                    </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('penimbangan.export') }}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Pilih Nama Dusun</label>
+                                    <select class="form-control" name="id_dusun" id="namaDusun">
+                                        <option value="" disabled>Pilih Dusun</option>
+                                        <option value="0" class="fw-bold">Semua Dusun</option>
+                                        @foreach ($dataDusun as $index => $dt)
+                                            <option value="{{ $dt->id }}">{{ $dt->nama_dusun }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Periode Awal</label>
+                                    <input type="date" class="form-control" name="tgl_awal">
+                                </div>
+                                <div class="form-group">
+                                    <label>Periode Akhir</label>
+                                    <input type="date" class="form-control" name="tgl_akhir">
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="modal-footer no-bd">
+                    <button type="submit" class="btn btn-primary">Cetak</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                 </div>
                 </form>

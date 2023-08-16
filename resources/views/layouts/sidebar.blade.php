@@ -1,4 +1,4 @@
-<div class="sidebar sidebar-style-2">			
+<div class="sidebar sidebar-style-2">
     <div class="sidebar-wrapper scrollbar scrollbar-inner">
         <div class="sidebar-content">
             <div class="user">
@@ -37,31 +37,32 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                <li class="nav-item {{Request::is('home')? 'active':''}}">
+                <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
                     <a href='/' class="collapsed" aria-expanded="false">
                         <i class="fas fa-home"></i>
                         <p>Halaman Utama</p>
                     </a>
                 </li>
-                <li class="nav-item {{Request::is('dusun')? 'active':''}}">
+                <li class="nav-item {{ Request::is('dusun') ? 'active' : '' }}">
                     <a href='/dusun'>
                         <i class="fas fa-map-marker-alt"></i>
                         <p>Data Dusun</p>
                     </a>
                 </li>
-                <li class="nav-item {{Request::is('orangtua')? 'active':''}}">
+                <li class="nav-item {{ Request::is('orangtua') ? 'active' : '' }}">
                     <a href='/orangtua'>
                         <i class="fas fa-user-friends"></i>
                         <p>Data Orang Tua</p>
                     </a>
                 </li>
-                <li class="nav-item {{Request::is('balita')? 'active':''}}">
+                <li class="nav-item {{ Request::is('balita') ? 'active' : '' }}">
                     <a href='/balita'>
                         <i class="fas fa-child"></i>
                         <p>Data Balita</p>
                     </a>
                 </li>
-                <li class="nav-item {{Request::is('penimbangan') ? 'active':''}}">
+                <li
+                    class="nav-item {{ Request::is('penimbangan*', 'timbangan-form*', 'update-timbangan*') ? 'active' : '' }}">
                     <a href='/penimbangan'>
                         <i class="fas fa-balance-scale"></i>
                         <p>Data Penimbangan Balita</p>
