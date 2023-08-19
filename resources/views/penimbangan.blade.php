@@ -10,11 +10,12 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6 col-12">
-                                @if (isset($judulSiap) === true && isset($data))
+                                <h4 class="card-title">Tabel Penimbangan Balita</h4>
+                                {{-- @if (isset($judulSiap) === true && !empty($data))
                                     <h4 class="card-title"> Tabel Penimbangan {{ $data[0]->dusun->nama_dusun }}</h4>
                                 @else
                                     <h4 class="card-title">Tabel Penimbangan Balita</h4>
-                                @endif
+                                @endif --}}
                             </div>
                             <div class="col-md-6 col-6 d-flex justify-content-center justify-content-md-end mt-2 mt-md-0">
                                 @if (isset($tambahSiap) && isset($idDusun))

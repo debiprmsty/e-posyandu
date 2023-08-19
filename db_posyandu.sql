@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Agu 2023 pada 09.13
+-- Waktu pembuatan: 19 Agu 2023 pada 18.48
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -31,7 +31,7 @@ CREATE TABLE `balitas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_orangtua` bigint(20) UNSIGNED NOT NULL,
   `id_dusun` bigint(20) UNSIGNED NOT NULL,
-  `nik_balita` varchar(255) NOT NULL,
+  `nik_balita` varchar(255) NOT NULL DEFAULT '0',
   `nama_balita` varchar(255) NOT NULL,
   `tanggal_lahir` date NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
@@ -44,11 +44,7 @@ CREATE TABLE `balitas` (
 --
 
 INSERT INTO `balitas` (`id`, `id_orangtua`, `id_dusun`, `nik_balita`, `nama_balita`, `tanggal_lahir`, `jenis_kelamin`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, '3436434', 'Sri Mustri Ningsih Astiti', '2023-08-31', 'Perempuan', '2023-08-08 22:52:49', '2023-08-08 22:50:48'),
-(6, 9, 6, '15626738281990', 'Ketut Sri Diana Lestari', '2022-05-09', 'Perempuan', '2023-08-09 17:43:17', '2023-08-09 17:43:17'),
-(7, 1, 2, '156265617175267', 'Lanang Bramanta', '2020-07-24', 'Laki-Laki', '2023-08-09 17:44:19', '2023-08-09 17:44:19'),
-(8, 11, 11, '77773948384983', 'Kadek Obe', '2023-03-16', 'Laki-Laki', '2023-08-15 09:10:11', '2023-08-15 09:10:11'),
-(9, 11, 11, '5923403298', 'Obe Ganteng', '2023-08-16', 'Laki-Laki', '2023-08-17 07:43:57', '2023-08-17 07:43:57');
+(12, 18, 7, '5106036912180002', 'I Dewa A. Ayu Sinta Ari Yanti', '2018-12-29', 'Perempuan', '2023-08-19 23:23:30', '2023-08-19 23:23:30');
 
 -- --------------------------------------------------------
 
@@ -111,7 +107,8 @@ INSERT INTO `dusuns` (`id`, `nama_dusun`, `created_at`, `updated_at`) VALUES
 (20, 'Dusun Tambahan Bakas', '2023-08-08 20:55:13', '2023-08-08 20:55:13'),
 (21, 'Dusun Tambahan Kelod', '2023-08-08 20:55:24', '2023-08-08 20:55:24'),
 (22, 'Dusun Tambahan Tengah', '2023-08-08 22:35:50', '2023-08-08 22:35:50'),
-(23, 'Dusun Antugan', '2023-08-09 04:57:19', '2023-08-09 04:57:19');
+(23, 'Dusun Antugan', '2023-08-09 04:57:19', '2023-08-09 04:57:19'),
+(24, 'Dusun Pembungan', '2023-08-19 21:31:29', '2023-08-19 21:31:29');
 
 -- --------------------------------------------------------
 
@@ -191,10 +188,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `orang_tuas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_dusun` bigint(20) UNSIGNED NOT NULL,
-  `nik_bapak` varchar(255) NOT NULL,
-  `nik_ibu` varchar(255) NOT NULL,
-  `nama_bapak` varchar(255) NOT NULL,
-  `nama_ibu` varchar(255) NOT NULL,
+  `nik_bapak` varchar(255) NOT NULL DEFAULT '0',
+  `nik_ibu` varchar(255) NOT NULL DEFAULT '0',
+  `nama_bapak` varchar(255) DEFAULT NULL,
+  `nama_ibu` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -204,10 +201,11 @@ CREATE TABLE `orang_tuas` (
 --
 
 INSERT INTO `orang_tuas` (`id`, `id_dusun`, `nik_bapak`, `nik_ibu`, `nama_bapak`, `nama_ibu`, `created_at`, `updated_at`) VALUES
-(1, 2, '1242342534543', '123131345454', 'Lanang Surya Darma', 'Luh Debi Pramesty', '2023-08-08 05:10:58', '2023-08-08 22:22:34'),
-(9, 6, '125526267152671', '156152516525165', 'Kadek Sandiarta', 'Luh Sariasih', '2023-08-09 17:41:11', '2023-08-09 17:41:11'),
-(10, 2, '1425617172672718', '1331425262736617', 'Made Lanang Putra', 'Nengah Sri Mustika Ningsih', '2023-08-09 17:42:14', '2023-08-09 17:42:14'),
-(11, 11, '343546546565454', '4242532252', 'Nyoman Suastana', 'Nyoman Suasini', '2023-08-15 09:07:20', '2023-08-15 09:07:20');
+(13, 11, '0', '0', 'Putu Agastia', 'Made Sri Yuliantari', '2023-08-19 22:54:33', '2023-08-19 22:54:33'),
+(14, 14, '0', '0', 'Putu Darmayasa', 'Alit Juita Santi', '2023-08-19 22:55:49', '2023-08-19 22:55:49'),
+(15, 20, '0', '0', 'Dewa Agung Gede Putra', 'Kadek Sulasih', '2023-08-19 22:57:11', '2023-08-19 22:57:11'),
+(16, 6, '0', '510603560882001', NULL, 'Ni Kadek Rusmini', '2023-08-19 23:08:15', '2023-08-19 23:08:15'),
+(18, 7, '0', '0', NULL, 'Dewa Ayu Okta Diantini', '2023-08-19 23:21:34', '2023-08-19 23:21:34');
 
 -- --------------------------------------------------------
 
@@ -244,16 +242,7 @@ CREATE TABLE `penimbangans` (
 --
 
 INSERT INTO `penimbangans` (`id`, `id_balita`, `id_dusun`, `id_keterangan`, `tgl_timbangan`, `berat_badan`, `tinggi_badan`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 1, '2023-08-02', 50, 120.5, '2023-08-12 11:01:36', '2023-08-15 13:23:01'),
-(2, 6, 6, 3, '2023-08-12', 23.5, 10.5, '2023-08-12 11:01:36', '2023-08-12 11:01:36'),
-(22, 6, 6, 1, '2023-08-14', 60, 120, '2023-08-15 01:29:05', '2023-08-15 01:29:05'),
-(32, 6, 6, 4, '2023-12-15', 41, 120, '2023-08-15 20:47:38', '2023-08-15 20:49:38'),
-(33, 6, 6, 2, '2024-01-01', 20, 120, '2023-08-15 20:50:52', '2023-08-15 20:50:52'),
-(34, 8, 11, 4, '2023-08-16', 19, 120, NULL, NULL),
-(37, 9, 11, 2, '2023-09-12', 20, 129, '2023-08-17 08:05:50', '2023-08-17 12:49:51'),
-(40, 7, 2, 4, '2023-07-07', 20, 120, '2023-08-19 07:33:30', '2023-08-19 07:33:30'),
-(43, 7, 2, 1, '2023-08-31', 32, 150, '2023-08-19 07:37:13', '2023-08-19 07:37:13'),
-(44, 1, 2, 2, '2023-09-23', 10, 120, '2023-08-19 08:22:54', '2023-08-19 08:22:54');
+(49, 12, 7, 4, '2023-08-10', 13.9, 102.6, '2023-08-19 23:42:08', '2023-08-19 23:42:08');
 
 -- --------------------------------------------------------
 
@@ -379,7 +368,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `balitas`
 --
 ALTER TABLE `balitas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `bulans`
@@ -391,7 +380,7 @@ ALTER TABLE `bulans`
 -- AUTO_INCREMENT untuk tabel `dusuns`
 --
 ALTER TABLE `dusuns`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -415,13 +404,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `orang_tuas`
 --
 ALTER TABLE `orang_tuas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `penimbangans`
 --
 ALTER TABLE `penimbangans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`

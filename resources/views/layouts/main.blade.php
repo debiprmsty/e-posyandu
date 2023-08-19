@@ -142,7 +142,7 @@
 
             });
         });
-        
+
         var nilai1 = document.getElementById('circles-1').getAttribute('data-value');
         var nilai2 = document.getElementById('circles-2').getAttribute('data-value');
         var nilai3 = document.getElementById('circles-3').getAttribute('data-value');
@@ -151,7 +151,7 @@
             id: 'circles-1',
             radius: 45,
             value: nilai1,
-            maxValue: 100,
+            maxValue: 1000,
             width: 7,
             text: nilai1,
             colors: ['#f1f1f1', '#FF9E27'],
@@ -166,7 +166,7 @@
             id: 'circles-2',
             radius: 45,
             value: nilai2,
-            maxValue: 100,
+            maxValue: 1000,
             width: 7,
             text: nilai2,
             colors: ['#f1f1f1', '#2BB930'],
@@ -181,7 +181,7 @@
             id: 'circles-3',
             radius: 45,
             value: nilai3,
-            maxValue: 100,
+            maxValue: 1000,
             width: 7,
             text: nilai3,
             colors: ['#f1f1f1', '#F25961'],
@@ -194,16 +194,20 @@
 
         var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 
+        var grafik = document.getElementById('totalIncomeChart').getAttribute('data-value');
+        var dataGrafik = JSON.parse(grafik);
+
         var mytotalIncomeChart = new Chart(totalIncomeChart, {
             type: 'bar',
             data: {
-                labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
+                labels: ["GL", "JK", "JKL", "KD", "KP", "SG", "SU", "TB", "PK", "TBA", "TK", "TT", "AT", "PB"],
                 datasets: [{
                     label: "Total Income",
                     backgroundColor: '#ff9e27',
                     borderColor: 'rgb(23, 125, 255)',
-                    data: [6.5, 4, 9, 5, 4, 6, 4, 3, 8, 10],
+                    data: dataGrafik,
                 }],
+
             },
             options: {
                 responsive: true,
@@ -228,6 +232,39 @@
                         }
                     }]
                 },
+                tooltips: {
+                    callbacks: {
+                        title: function(tooltipItems, data) {
+                            // Mendapatkan index dari data yang dihover
+                            var index = tooltipItems[0].index;
+                            // Mendapatkan label asli dari data.labels
+                            var label = data.labels[index];
+                            // Ubah label menjadi yang diinginkan
+                            // ["JK", "JKL", "KD", "GL", "KP", "SG", "SU", "TB", "PK", "TBA", "TK", "TT", "AT"],
+
+                            if (label === "GL") return "Galiran";
+                            else if (label === "JKL") return "Jehem Kelod";
+                            else if (label === "KD") return "Kaulan Dewa";
+                            else if (label === "JK") return "Jehem Kaja";
+                            else if (label === "KP") return "Kelempung";
+                            else if (label === "SG") return "Sama Griya";
+                            else if (label === "SU") return "Sama Undisan";
+                            else if (label === "TB") return "Tingkad Batu";
+                            else if (label === "PK") return "Pasekan";
+                            else if (label === "TBA") return "Tambahan Bakas";
+                            else if (label === "TK") return "Tambahan Kelod";
+                            else if (label === "TT") return "Tambahan Tengah";
+                            else if (label === "AT") return "Antugan";
+                            else if (label === "PB") return "Pembungan";
+                            // Tambahkan logika sesuai dengan label lainnya
+                            else return label;
+                        },
+                        label: function(tooltipItem, data) {
+                            return 'Total ' + tooltipItem.yLabel; // Menampilkan nilai data pada tooltip
+                        }
+                    }
+                }
+
             }
         });
 

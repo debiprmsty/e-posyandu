@@ -42,16 +42,16 @@
                             <div class="col-md-4 d-flex flex-column justify-content-around">
                                 <div>
                                     <h6 class="fw-bold text-uppercase text-success op-8">Rata Rata Berat</h6>
-                                    <h3 class="fw-bold">$9.782</h3>
+                                    <h3 class="fw-bold">{{ $rataBeratBadan }} kg</h3>
                                 </div>
                                 <div>
                                     <h6 class="fw-bold text-uppercase text-danger op-8">Rata Rata Tinggi</h6>
-                                    <h3 class="fw-bold">$1,248</h3>
+                                    <h3 class="fw-bold">{{ $rataTinggiBadan }} cm</h3>
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div id="chart-container">
-                                    <canvas id="totalIncomeChart"></canvas>
+                                    <canvas id="totalIncomeChart" data-value="{{ $grafikEscaped }}"></canvas>
                                 </div>
                             </div>
                         </div>

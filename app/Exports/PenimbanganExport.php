@@ -172,7 +172,13 @@ class PenimbanganExport implements FromCollection, WithHeadings, WithMapping, Sh
                 $rowData[] = $balita->tanggal_lahir;
 
                 $ortu = $balita->ortu;
-                $rowData[] = $ortu->nama_bapak . '/' . $ortu->nama_ibu;
+                if ($ortu->nama_bapak == null) {
+                    $rowData[] = $ortu->nama_ibu;
+                } else if ($ortu->nama_ibu == null) {
+                    $rowData[] = $ortu->nama_bapak;
+                } else {
+                    $rowData[] = $ortu->nama_bapak . '/' . $ortu->nama_ibu;
+                }
                 $rowData[] = $ortu->nik_bapak . '/' . $ortu->nik_ibu;
             } else {
                 $rowData[] = '';

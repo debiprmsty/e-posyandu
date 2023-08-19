@@ -64,16 +64,16 @@ class FormController extends Controller
 
         $selisihHari = $tanggalBaru->diffInDays($tanggalSebelum);
 
+
         if (count($penimbanganData) !== 0) {
             $beratBadanSebelum = $penimbanganData->first()->berat_badan;
         } else {
             $beratBadanSebelum = $beratBadanTerbaru;
         }
-        // // $pemula = count($beratBadanSebelum);
         $beratBadanSesudah = $beratBadanTerbaru;
 
-        // // Lakukan perbandingan dan ubah id_keterangan sesuai kondisi
-        if ($selisihHari <= 28 || count($penimbanganData) == 0) {
+        // // // Lakukan perbandingan dan ubah id_keterangan sesuai kondisi
+        if ($selisihHari >= 62 || count($penimbanganData) == 0) {
             $idKeterangan = 4;
         } else if ($beratBadanSesudah == $beratBadanSebelum) {
             $idKeterangan = 3;
@@ -179,7 +179,7 @@ class FormController extends Controller
         $beratBadanSesudah = $beratBadanTerbaru;
 
         // // // Lakukan perbandingan dan ubah id_keterangan sesuai kondisi
-        if ($selisihHari == 0 || $selisihHari <= 28) {
+        if ($selisihHari == 0 || $selisihHari >= 62) {
             $idKeterangan = 4;
         } else if ($beratBadanSesudah > $beratBadanSebelum) {
             $idKeterangan = 1;
