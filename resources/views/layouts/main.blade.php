@@ -142,13 +142,18 @@
 
             });
         });
+        
+        var nilai1 = document.getElementById('circles-1').getAttribute('data-value');
+        var nilai2 = document.getElementById('circles-2').getAttribute('data-value');
+        var nilai3 = document.getElementById('circles-3').getAttribute('data-value');
+
         Circles.create({
             id: 'circles-1',
             radius: 45,
-            value: 60,
+            value: nilai1,
             maxValue: 100,
             width: 7,
-            text: 5,
+            text: nilai1,
             colors: ['#f1f1f1', '#FF9E27'],
             duration: 400,
             wrpClass: 'circles-wrp',
@@ -160,10 +165,10 @@
         Circles.create({
             id: 'circles-2',
             radius: 45,
-            value: 70,
+            value: nilai2,
             maxValue: 100,
             width: 7,
-            text: 36,
+            text: nilai2,
             colors: ['#f1f1f1', '#2BB930'],
             duration: 400,
             wrpClass: 'circles-wrp',
@@ -175,10 +180,10 @@
         Circles.create({
             id: 'circles-3',
             radius: 45,
-            value: 40,
+            value: nilai3,
             maxValue: 100,
             width: 7,
-            text: 12,
+            text: nilai3,
             colors: ['#f1f1f1', '#F25961'],
             duration: 400,
             wrpClass: 'circles-wrp',

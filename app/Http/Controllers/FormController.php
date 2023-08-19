@@ -46,26 +46,34 @@ class FormController extends Controller
 
         $penimbanganData = $dataTerbaru->penimbangan;
 
-        // Urutkan data penimbangan berdasarkan tgl_timbangan secara manual
+        // // Urutkan data penimbangan berdasarkan tgl_timbangan secara manual
         $penimbanganData = $penimbanganData->sortByDesc('tgl_timbangan');
 
         $beratBadanTerbaru = $request->input('berat_badan');
         $tinggiBadanBaru = $request->input('tinggi_badan');
         $tglBaru = $request->input('tgl_timbangan');
-        $tglSebelum = $penimbanganData->first()->tgl_timbangan;
 
-        // Mengonversi string tanggal ke objek DateTime
+        if (count($penimbanganData) !== 0) {
+            $tglSebelum = $penimbanganData->first()->tgl_timbangan;
+        } else {
+            $tglSebelum = $tglBaru;
+        }
+        // // Mengonversi string tanggal ke objek DateTime
         $tanggalBaru = Carbon::createFromFormat('Y-m-d', $tglBaru);
         $tanggalSebelum = Carbon::createFromFormat('Y-m-d', $tglSebelum);
 
         $selisihHari = $tanggalBaru->diffInDays($tanggalSebelum);
 
-        $beratBadanSebelum = $penimbanganData->first()->berat_badan;
-        // $pemula = count($beratBadanSebelum);
+        if (count($penimbanganData) !== 0) {
+            $beratBadanSebelum = $penimbanganData->first()->berat_badan;
+        } else {
+            $beratBadanSebelum = $beratBadanTerbaru;
+        }
+        // // $pemula = count($beratBadanSebelum);
         $beratBadanSesudah = $beratBadanTerbaru;
 
-        // Lakukan perbandingan dan ubah id_keterangan sesuai kondisi
-        if ($selisihHari > 31) {
+        // // Lakukan perbandingan dan ubah id_keterangan sesuai kondisi
+        if ($selisihHari <= 28 || count($penimbanganData) == 0) {
             $idKeterangan = 4;
         } else if ($beratBadanSesudah == $beratBadanSebelum) {
             $idKeterangan = 3;
@@ -150,7 +158,10 @@ class FormController extends Controller
         $tinggiBadanBaru = $request->input('tinggi_badan');
         $tglBaru = $request->input('tgl_timbangan');
         $duaDataTerakhir = $penimbanganData->take(2);
-        $tglSebelum = $penimbanganData[2]->tgl_timbangan;
+
+        if (count($penimbanganData) !== 0) {
+            $tglSebelum = $penimbanganData[0]->tgl_timbangan;
+        }
 
 
 
@@ -160,12 +171,15 @@ class FormController extends Controller
 
         $selisihHari = $tanggalBaru->diffInDays($tanggalSebelum);
 
-        $beratBadanSebelum = $penimbanganData[2]->berat_badan;
-        // $pemula = count($beratBadanSebelum);
+        if (count($penimbanganData) !== 0) {
+            $beratBadanSebelum = $penimbanganData[0]->berat_badan;
+        }
+
+        // // // $pemula = count($beratBadanSebelum);
         $beratBadanSesudah = $beratBadanTerbaru;
 
-        // Lakukan perbandingan dan ubah id_keterangan sesuai kondisi
-        if ($selisihHari == 0 || $selisihHari > 31) {
+        // // // Lakukan perbandingan dan ubah id_keterangan sesuai kondisi
+        if ($selisihHari == 0 || $selisihHari <= 28) {
             $idKeterangan = 4;
         } else if ($beratBadanSesudah > $beratBadanSebelum) {
             $idKeterangan = 1;

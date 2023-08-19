@@ -3,12 +3,12 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-                    <img src="{{ asset('assets/img/profile.jpg') }}" alt="..." class="avatar-img rounded-circle">
+                    <img src="{{ asset('assets/img/pf.png') }}" alt="..." class="avatar-img rounded-circle">
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                         <span>
-                            Hizrian
+                            Halo saya
                             <span class="user-level">Administrator</span>
 
                         </span>
@@ -37,8 +37,8 @@
                 </div>
             </div>
             <ul class="nav nav-primary">
-                <li class="nav-item {{ Request::is('home') ? 'active' : '' }}">
-                    <a href='/' class="collapsed" aria-expanded="false">
+                <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
+                    <a href='{{ route('home') }}' class="collapsed" aria-expanded="false">
                         <i class="fas fa-home"></i>
                         <p>Halaman Utama</p>
                     </a>

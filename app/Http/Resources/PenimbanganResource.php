@@ -21,7 +21,7 @@ class PenimbanganResource extends JsonResource
             "berat_badan" => $this->berat_badan,
             "tinggi_badan" => $this->tinggi_badan,
             "dusun" => $this->dusun,
-            "balita" => $this->balita,
+            "balita" => new BalitaResource($this->balita),
             "keterangan" => $this->keterangan
         ];
     }

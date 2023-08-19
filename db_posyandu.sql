@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2023 at 05:10 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Waktu pembuatan: 19 Agu 2023 pada 09.13
+-- Versi server: 10.4.28-MariaDB
+-- Versi PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,45 +24,47 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `balitas`
+-- Struktur dari tabel `balitas`
 --
 
 CREATE TABLE `balitas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_orangtua` bigint(20) UNSIGNED NOT NULL,
   `id_dusun` bigint(20) UNSIGNED NOT NULL,
-  `nik_balita` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_balita` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nik_balita` varchar(255) NOT NULL,
+  `nama_balita` varchar(255) NOT NULL,
   `tanggal_lahir` date NOT NULL,
-  `jenis_kelamin` enum('Laki-Laki','Perempuan') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `balitas`
+-- Dumping data untuk tabel `balitas`
 --
 
 INSERT INTO `balitas` (`id`, `id_orangtua`, `id_dusun`, `nik_balita`, `nama_balita`, `tanggal_lahir`, `jenis_kelamin`, `created_at`, `updated_at`) VALUES
 (1, 1, 2, '3436434', 'Sri Mustri Ningsih Astiti', '2023-08-31', 'Perempuan', '2023-08-08 22:52:49', '2023-08-08 22:50:48'),
 (6, 9, 6, '15626738281990', 'Ketut Sri Diana Lestari', '2022-05-09', 'Perempuan', '2023-08-09 17:43:17', '2023-08-09 17:43:17'),
-(7, 1, 2, '156265617175267', 'Lanang Bramanta', '2020-07-24', 'Laki-Laki', '2023-08-09 17:44:19', '2023-08-09 17:44:19');
+(7, 1, 2, '156265617175267', 'Lanang Bramanta', '2020-07-24', 'Laki-Laki', '2023-08-09 17:44:19', '2023-08-09 17:44:19'),
+(8, 11, 11, '77773948384983', 'Kadek Obe', '2023-03-16', 'Laki-Laki', '2023-08-15 09:10:11', '2023-08-15 09:10:11'),
+(9, 11, 11, '5923403298', 'Obe Ganteng', '2023-08-16', 'Laki-Laki', '2023-08-17 07:43:57', '2023-08-17 07:43:57');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bulans`
+-- Struktur dari tabel `bulans`
 --
 
 CREATE TABLE `bulans` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nama_bulan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_bulan` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `bulans`
+-- Dumping data untuk tabel `bulans`
 --
 
 INSERT INTO `bulans` (`id`, `nama_bulan`, `created_at`, `updated_at`) VALUES
@@ -82,18 +84,18 @@ INSERT INTO `bulans` (`id`, `nama_bulan`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dusuns`
+-- Struktur dari tabel `dusuns`
 --
 
 CREATE TABLE `dusuns` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nama_dusun` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_dusun` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `dusuns`
+-- Dumping data untuk tabel `dusuns`
 --
 
 INSERT INTO `dusuns` (`id`, `nama_dusun`, `created_at`, `updated_at`) VALUES
@@ -106,7 +108,6 @@ INSERT INTO `dusuns` (`id`, `nama_dusun`, `created_at`, `updated_at`) VALUES
 (15, 'Dusun Sama Undisan', '2023-08-08 20:52:51', '2023-08-08 20:52:51'),
 (16, 'Dusun Tingkad Batu', '2023-08-08 20:53:10', '2023-08-08 20:53:10'),
 (18, 'Dusun Pasekan', '2023-08-08 20:53:23', '2023-08-08 20:53:23'),
-(19, 'Dusun Pembungan', '2023-08-08 20:53:45', '2023-08-08 20:53:45'),
 (20, 'Dusun Tambahan Bakas', '2023-08-08 20:55:13', '2023-08-08 20:55:13'),
 (21, 'Dusun Tambahan Kelod', '2023-08-08 20:55:24', '2023-08-08 20:55:24'),
 (22, 'Dusun Tambahan Tengah', '2023-08-08 22:35:50', '2023-08-08 22:35:50'),
@@ -115,35 +116,35 @@ INSERT INTO `dusuns` (`id`, `nama_dusun`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
+-- Struktur dari tabel `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `keterangans`
+-- Struktur dari tabel `keterangans`
 --
 
 CREATE TABLE `keterangans` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `label_keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `label_keterangan` varchar(255) NOT NULL,
+  `nama_keterangan` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `keterangans`
+-- Dumping data untuk tabel `keterangans`
 --
 
 INSERT INTO `keterangans` (`id`, `label_keterangan`, `nama_keterangan`, `created_at`, `updated_at`) VALUES
@@ -155,17 +156,17 @@ INSERT INTO `keterangans` (`id`, `label_keterangan`, `nama_keterangan`, `created
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migrations`
+-- Struktur dari tabel `migrations`
 --
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `migrations`
+-- Dumping data untuk tabel `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -184,45 +185,46 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `orang_tuas`
+-- Struktur dari tabel `orang_tuas`
 --
 
 CREATE TABLE `orang_tuas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_dusun` bigint(20) UNSIGNED NOT NULL,
-  `nik_bapak` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nik_ibu` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_bapak` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_ibu` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nik_bapak` varchar(255) NOT NULL,
+  `nik_ibu` varchar(255) NOT NULL,
+  `nama_bapak` varchar(255) NOT NULL,
+  `nama_ibu` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `orang_tuas`
+-- Dumping data untuk tabel `orang_tuas`
 --
 
 INSERT INTO `orang_tuas` (`id`, `id_dusun`, `nik_bapak`, `nik_ibu`, `nama_bapak`, `nama_ibu`, `created_at`, `updated_at`) VALUES
 (1, 2, '1242342534543', '123131345454', 'Lanang Surya Darma', 'Luh Debi Pramesty', '2023-08-08 05:10:58', '2023-08-08 22:22:34'),
 (9, 6, '125526267152671', '156152516525165', 'Kadek Sandiarta', 'Luh Sariasih', '2023-08-09 17:41:11', '2023-08-09 17:41:11'),
-(10, 2, '1425617172672718', '1331425262736617', 'Made Lanang Putra', 'Nengah Sri Mustika Ningsih', '2023-08-09 17:42:14', '2023-08-09 17:42:14');
+(10, 2, '1425617172672718', '1331425262736617', 'Made Lanang Putra', 'Nengah Sri Mustika Ningsih', '2023-08-09 17:42:14', '2023-08-09 17:42:14'),
+(11, 11, '343546546565454', '4242532252', 'Nyoman Suastana', 'Nyoman Suasini', '2023-08-15 09:07:20', '2023-08-15 09:07:20');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `password_reset_tokens`
+-- Struktur dari tabel `password_reset_tokens`
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `penimbangans`
+-- Struktur dari tabel `penimbangans`
 --
 
 CREATE TABLE `penimbangans` (
@@ -238,28 +240,34 @@ CREATE TABLE `penimbangans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `penimbangans`
+-- Dumping data untuk tabel `penimbangans`
 --
 
 INSERT INTO `penimbangans` (`id`, `id_balita`, `id_dusun`, `id_keterangan`, `tgl_timbangan`, `berat_badan`, `tinggi_badan`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 2, '2023-08-02', 10.5, 120.5, '2023-08-12 11:01:36', '2023-08-12 11:01:36'),
+(1, 1, 2, 1, '2023-08-02', 50, 120.5, '2023-08-12 11:01:36', '2023-08-15 13:23:01'),
 (2, 6, 6, 3, '2023-08-12', 23.5, 10.5, '2023-08-12 11:01:36', '2023-08-12 11:01:36'),
-(3, 7, 2, 1, '2023-08-12', 14.8, 120.5, '2023-08-12 11:07:00', '2023-08-12 11:07:00'),
-(5, 7, 2, 4, '2023-08-13', 12.8, 112.5, '2023-08-13 14:32:52', '2023-08-13 14:32:52');
+(22, 6, 6, 1, '2023-08-14', 60, 120, '2023-08-15 01:29:05', '2023-08-15 01:29:05'),
+(32, 6, 6, 4, '2023-12-15', 41, 120, '2023-08-15 20:47:38', '2023-08-15 20:49:38'),
+(33, 6, 6, 2, '2024-01-01', 20, 120, '2023-08-15 20:50:52', '2023-08-15 20:50:52'),
+(34, 8, 11, 4, '2023-08-16', 19, 120, NULL, NULL),
+(37, 9, 11, 2, '2023-09-12', 20, 129, '2023-08-17 08:05:50', '2023-08-17 12:49:51'),
+(40, 7, 2, 4, '2023-07-07', 20, 120, '2023-08-19 07:33:30', '2023-08-19 07:33:30'),
+(43, 7, 2, 1, '2023-08-31', 32, 150, '2023-08-19 07:37:13', '2023-08-19 07:37:13'),
+(44, 1, 2, 2, '2023-09-23', 10, 120, '2023-08-19 08:22:54', '2023-08-19 08:22:54');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `personal_access_tokens`
+-- Struktur dari tabel `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -269,16 +277,16 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -288,7 +296,7 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `balitas`
+-- Indeks untuk tabel `balitas`
 --
 ALTER TABLE `balitas`
   ADD PRIMARY KEY (`id`),
@@ -296,51 +304,51 @@ ALTER TABLE `balitas`
   ADD KEY `balitas_id_dusun_foreign` (`id_dusun`);
 
 --
--- Indexes for table `bulans`
+-- Indeks untuk tabel `bulans`
 --
 ALTER TABLE `bulans`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `dusuns`
+-- Indeks untuk tabel `dusuns`
 --
 ALTER TABLE `dusuns`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `failed_jobs`
+-- Indeks untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indexes for table `keterangans`
+-- Indeks untuk tabel `keterangans`
 --
 ALTER TABLE `keterangans`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `migrations`
+-- Indeks untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `orang_tuas`
+-- Indeks untuk tabel `orang_tuas`
 --
 ALTER TABLE `orang_tuas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `orang_tuas_id_dusun_foreign` (`id_dusun`);
 
 --
--- Indexes for table `password_reset_tokens`
+-- Indeks untuk tabel `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indexes for table `penimbangans`
+-- Indeks untuk tabel `penimbangans`
 --
 ALTER TABLE `penimbangans`
   ADD PRIMARY KEY (`id`),
@@ -349,7 +357,7 @@ ALTER TABLE `penimbangans`
   ADD KEY `penimbangans_id_keterangan_foreign` (`id_keterangan`);
 
 --
--- Indexes for table `personal_access_tokens`
+-- Indeks untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -357,95 +365,95 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `balitas`
+-- AUTO_INCREMENT untuk tabel `balitas`
 --
 ALTER TABLE `balitas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `bulans`
+-- AUTO_INCREMENT untuk tabel `bulans`
 --
 ALTER TABLE `bulans`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `dusuns`
+-- AUTO_INCREMENT untuk tabel `dusuns`
 --
 ALTER TABLE `dusuns`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
+-- AUTO_INCREMENT untuk tabel `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `keterangans`
+-- AUTO_INCREMENT untuk tabel `keterangans`
 --
 ALTER TABLE `keterangans`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `migrations`
+-- AUTO_INCREMENT untuk tabel `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `orang_tuas`
+-- AUTO_INCREMENT untuk tabel `orang_tuas`
 --
 ALTER TABLE `orang_tuas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `penimbangans`
+-- AUTO_INCREMENT untuk tabel `penimbangans`
 --
 ALTER TABLE `penimbangans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT for table `personal_access_tokens`
+-- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `balitas`
+-- Ketidakleluasaan untuk tabel `balitas`
 --
 ALTER TABLE `balitas`
   ADD CONSTRAINT `balitas_id_dusun_foreign` FOREIGN KEY (`id_dusun`) REFERENCES `dusuns` (`id`),
   ADD CONSTRAINT `balitas_id_orangtua_foreign` FOREIGN KEY (`id_orangtua`) REFERENCES `orang_tuas` (`id`);
 
 --
--- Constraints for table `orang_tuas`
+-- Ketidakleluasaan untuk tabel `orang_tuas`
 --
 ALTER TABLE `orang_tuas`
   ADD CONSTRAINT `orang_tuas_id_dusun_foreign` FOREIGN KEY (`id_dusun`) REFERENCES `dusuns` (`id`);
 
 --
--- Constraints for table `penimbangans`
+-- Ketidakleluasaan untuk tabel `penimbangans`
 --
 ALTER TABLE `penimbangans`
   ADD CONSTRAINT `penimbangans_id_balita_foreign` FOREIGN KEY (`id_balita`) REFERENCES `balitas` (`id`),

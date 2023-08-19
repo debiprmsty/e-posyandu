@@ -18,7 +18,7 @@ class BalitaResource extends JsonResource
             "jk" => $this->jenis_kelamin,
             "ortu" => $this->ortu,
             "dusun" => $this->dusun,
-            "penimbangan" => PenimbanganResource::collection($this->whenLoaded('penimbangan'))
+            "penimbangan" => $this->penimbangan
         ];
     }
 }

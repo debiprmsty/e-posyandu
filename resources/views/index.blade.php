@@ -19,15 +19,15 @@
                         <div class="card-category">Informasi Penimbangan Bulanan Balita</div>
                         <div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
                             <div class="px-2 pb-2 pb-md-0 text-center">
-                                <div id="circles-1"></div>
+                                <div id="circles-1" data-value="{{ $dataTetap }}">{{ $dataTetap }}</div>
                                 <h6 class="fw-bold mt-3 mb-0">Tetap</h6>
                             </div>
                             <div class="px-2 pb-2 pb-md-0 text-center">
-                                <div id="circles-2"></div>
+                                <div id="circles-2" data-value="{{ $dataNaik }}">{{ $dataNaik }}</div>
                                 <h6 class="fw-bold mt-3 mb-0">Naik</h6>
                             </div>
                             <div class="px-2 pb-2 pb-md-0 text-center">
-                                <div id="circles-3"></div>
+                                <div id="circles-3" data-value="{{ $dataTurun }}">{{ $dataTurun }}</div>
                                 <h6 class="fw-bold mt-3 mb-0">Turun</h6>
                             </div>
                         </div>
@@ -80,8 +80,12 @@
                     <div class="card-body">
                         <div class="card-opening text-center">Tentang E-Posyandu,</div>
                         <div class="card-desc text-justify">
-                            E-Posyandu adalah Sistem Pos Pelayanan Terpadu berbasis digital yang digunakan sebagai pencatatan hasil penimbangan balita, baik tinggi badan maupun berat badan.
-                            E-Posyandu dilengkapi dengan fitur-fitur diantaranya, <b>Pencatatan</b>, melakukan pencatatan data dusun, orang tua, balita, dan penimbangan balita. <b>Pencarian</b>, melakukan pencarian secara otomatis dengan beragam kategori pencarian dan <b>Pelaporan</b>, melakukan pelaporan bulanan dan tahunan, maupun rata rata tinggi dan berat badan di setiap dusun secara otomatis.
+                            E-Posyandu adalah Sistem Pos Pelayanan Terpadu berbasis digital yang digunakan sebagai
+                            pencatatan hasil penimbangan balita, baik tinggi badan maupun berat badan.
+                            E-Posyandu dilengkapi dengan fitur-fitur diantaranya, <b>Pencatatan</b>, melakukan pencatatan
+                            data dusun, orang tua, balita, dan penimbangan balita. <b>Pencarian</b>, melakukan pencarian
+                            secara otomatis dengan beragam kategori pencarian dan <b>Pelaporan</b>, melakukan pelaporan
+                            bulanan dan tahunan, maupun rata rata tinggi dan berat badan di setiap dusun secara otomatis.
                         </div>
                     </div>
                 </div>

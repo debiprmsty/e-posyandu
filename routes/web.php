@@ -6,6 +6,8 @@ use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\BalitaController;
 use App\Http\Controllers\PenimbanganController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,10 +20,9 @@ use App\Http\Controllers\FormController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
-
+Route::prefix('/')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});
 
 Route::prefix('/dusun')->group(function () {
     Route::get('/', [DusunController::class, 'index'])->name('dusun.index');

@@ -13,42 +13,60 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Font;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use App\Http\Resources\PenimbanganResource;
+use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Carbon\Carbon;
+use App\Models\Balita;
+use PhpOffice\PhpSpreadsheet\Worksheet\HeaderFooter;
 
+use function PHPSTORM_META\map;
 
-
-class PenimbanganExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSize, WithStyles
+class PenimbanganExport implements FromCollection, WithHeadings, WithMapping, ShouldAutoSize, WithStyles, WithColumnFormatting
 {
     use Exportable;
 
     private $id_dusun;
     private $tgl_awal;
     private $tgl_akhir;
+    private $no;
 
     public function headings(): array
     {
         return [
-            ['Nama Balita', 'Tanggal Lahir', 'Nama Orang Tua', 'Januari', '', 'Februari', '', 'Maret', '', 'April', '', 'Mei', '', 'Juni', '', 'Juli', '', 'Agustus', '', 'September', '', 'Oktober', '', 'November', '', 'Desember', ''],
-            ['', '', '', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB'],
+            ['No', 'Nama Balita', 'NIK Balita', 'Tanggal Lahir', 'Nama Orang Tua (Bapak/Ibu)', 'NIK Orang Tua (Bapak/Ibu)', 'Januari', '', 'Februari', '', 'Maret', '', 'April', '', 'Mei', '', 'Juni', '', 'Juli', '', 'Agustus', '', 'September', '', 'Oktober', '', 'November', '', 'Desember', '', 'Keterangan'],
+            ['', '', '', '', '', '', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', 'BB', 'TB', '',],
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'C' => NumberFormat::FORMAT_NUMBER,
+            'F' => NumberFormat::FORMAT_NUMBER,
         ];
     }
     public function styles(Worksheet $sheet)
     {
-        $sheet->mergeCells('D1:E1');
-        $sheet->mergeCells('F1:G1');
-        $sheet->mergeCells('H1:I1');
-        $sheet->mergeCells('J1:K1');
-        $sheet->mergeCells('L1:M1');
-        $sheet->mergeCells('N1:O1');
-        $sheet->mergeCells('P1:Q1');
-        $sheet->mergeCells('R1:S1');
-        $sheet->mergeCells('T1:U1');
-        $sheet->mergeCells('V1:W1');
-        $sheet->mergeCells('X1:Y1');
-        $sheet->mergeCells('Z1:AA1');
+        $sheet->mergeCells('G1:H1');
+        $sheet->mergeCells('I1:J1');
+        $sheet->mergeCells('K1:L1');
+        $sheet->mergeCells('M1:N1');
+        $sheet->mergeCells('O1:P1');
+        $sheet->mergeCells('Q1:R1');
+        $sheet->mergeCells('S1:T1');
+        $sheet->mergeCells('U1:V1');
+        $sheet->mergeCells('W1:X1');
+        $sheet->mergeCells('Y1:Z1');
+        $sheet->mergeCells('AA1:AB1');
+        $sheet->mergeCells('AC1:AD1');
         $sheet->mergeCells('A1:A2');
         $sheet->mergeCells('B1:B2');
         $sheet->mergeCells('C1:C2');
-
+        $sheet->mergeCells('D1:D2');
+        $sheet->mergeCells('E1:E2');
+        $sheet->mergeCells('F1:F2');
+        $sheet->mergeCells('AE1:AE2');
         // Set border for all cells
         $styleArray = [
             'borders' => [
@@ -82,23 +100,108 @@ class PenimbanganExport implements FromQuery, WithHeadings, WithMapping, ShouldA
     }
 
 
-    public function __construct($id_dusun, $tgl_awal, $tgl_akhir)
+    public function __construct($no, $id_dusun, $tgl_awal, $tgl_akhir)
     {
         $this->id_dusun = $id_dusun;
         $this->tgl_awal = $tgl_awal;
         $this->tgl_akhir = $tgl_akhir;
+        $this->no = $no;
     }
-    public function query()
+    public function collection()
     {
-        return Penimbangan::with(['balita'])->where('id_dusun', $this->id_dusun)
-            ->whereBetween('tgl_timbangan', [$this->tgl_awal, $this->tgl_akhir]);
+        $data = Penimbangan::with(['balita'])
+            ->where('id_dusun', $this->id_dusun)
+            ->whereBetween('tgl_timbangan', [$this->tgl_awal, $this->tgl_akhir])
+            ->get()
+            ->groupBy('id_balita');
+
+        $collection = collect();
+
+        foreach ($data as $group) {
+            // Menggunakan PenimbanganResource untuk mengubah objek model
+            $resourceGroup = $group->map(function ($item) {
+                return new PenimbanganResource($item);
+            });
+
+            $collection->push($resourceGroup);
+        }
+
+        return $collection;
     }
-    public function map($penimbangan): array
+
+    public function map($group): array
     {
-        return [
-            $penimbangan->id,
-            $penimbangan->balita->nama_balita,
-            $penimbangan->balita->tanggal_lahir
-        ];
+        $beratBulan = [];
+        $tinggiBulan = [];
+        $existingBalitas = [];
+
+        // Inisialisasi struktur data berdasarkan balita dan bulan
+        foreach ($group as $index => $item) {
+            $balita = $item->balita;
+            $carbonDate = Carbon::parse($item->tgl_timbangan);
+            $bulanBaru = $carbonDate->month;
+
+            // Pastikan data penimbangan tersedia pada bulan tersebut
+            if ($item->berat_badan && $item->tinggi_badan) {
+                $beratBulan[$balita->id][$bulanBaru] = $item->berat_badan;
+                $tinggiBulan[$balita->id][$bulanBaru] = $item->tinggi_badan;
+            }
+
+            // Simpan informasi balita yang sudah diproses
+            if (!in_array($balita->nama_balita, $existingBalitas)) {
+                $existingBalitas[] = $balita->nama_balita;
+            }
+
+            // Simpan keterangan untuk digunakan nanti
+            $keterangan = $item->keterangan->nama_keterangan;
+        }
+
+        // Membuat array hasil
+        $result = [];
+        foreach ($existingBalitas as $namaBalita) {
+            $rowData = [
+                $this->no++,
+                $namaBalita,
+            ];
+
+            // Cari data balita berdasarkan nama
+            $balita = Balita::where('nama_balita', $namaBalita)->first();
+
+            if ($balita) {
+                $rowData[] = $balita->nik_balita;
+                $rowData[] = $balita->tanggal_lahir;
+
+                $ortu = $balita->ortu;
+                $rowData[] = $ortu->nama_bapak . '/' . $ortu->nama_ibu;
+                $rowData[] = $ortu->nik_bapak . '/' . $ortu->nik_ibu;
+            } else {
+                $rowData[] = '';
+                $rowData[] = '';
+                $rowData[] = '';
+                $rowData[] = '';
+            }
+
+            // Mengisi kolom berat dan tinggi berdasarkan data bulan dan balita
+            for ($bulan = 1; $bulan <= 12; $bulan++) {
+                if (isset($beratBulan[$balita->id][$bulan])) {
+                    $rowData[] = $beratBulan[$balita->id][$bulan] . ' kg';
+                } else {
+                    $rowData[] = 0;
+                }
+
+                if (isset($tinggiBulan[$balita->id][$bulan])) {
+                    $rowData[] = $tinggiBulan[$balita->id][$bulan] . ' cm';
+                } else {
+                    $rowData[] = 0;
+                }
+            }
+
+            // Keterangan (dari elemen terakhir dalam grup)
+            $rowData[] = $keterangan;
+
+            $result[] = $rowData;
+        }
+
+        return $result;
     }
 }

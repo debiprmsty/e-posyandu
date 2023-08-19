@@ -9,6 +9,7 @@ use App\Http\Resources\PenimbanganResource;
 use App\Exports\PenimbanganExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Lang;
 
 class PenimbanganController extends Controller
 {
@@ -27,8 +28,16 @@ class PenimbanganController extends Controller
         $id_dusun = $request->input('id_dusun');
         $tgl_awal = $request->input('tgl_awal');
         $tgl_akhir = $request->input('tgl_akhir');
+        $no = 1;
 
-        return (new PenimbanganExport($id_dusun, $tgl_awal, $tgl_akhir))->download('laporan-' . Carbon::now()->timestamp . '.' . 'xls');
+        $dusun = Dusun::find($id_dusun);
+        $bulan_awal = Carbon::parse($tgl_awal)->translatedFormat('F');
+        $bulan_akhir = Carbon::parse($tgl_akhir)->translatedFormat('F');
+
+        $bulan_awal = ucfirst($bulan_awal);
+        $bulan_akhir = ucfirst($bulan_akhir);
+
+        return (new PenimbanganExport($no, $id_dusun, $tgl_awal, $tgl_akhir))->download('LAPORAN ' . strtoupper($dusun->nama_dusun) . ' ' . $bulan_awal . ' - ' . $bulan_akhir . '.' . 'xls');
     }
 
     /**
