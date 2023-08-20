@@ -86,7 +86,9 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $dt->balita->dusun->nama_dusun }}</td>
                                             <td>{{ $dt->balita->nama_balita }}</td>
-                                            <td>{{ $dt->tgl_timbangan }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($dt->tgl_timbangan)->formatLocalized('%d %B %Y') }}
+                                            </td>
+
                                             <td>{{ $dt->berat_badan }}</td>
                                             <td>{{ $dt->tinggi_badan }}</td>
                                             <td class="text-center">{{ $dt->keterangan->label_keterangan }}</td>

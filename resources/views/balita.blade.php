@@ -128,7 +128,9 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $dt->nik_balita }}</td>
                                             <td>{{ $dt->nama_balita }}</td>
-                                            <td>{{ $dt->tanggal_lahir }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($dt->tanggal_lahir)->formatLocalized('%d %B %Y') }}
+                                            </td>
+
                                             <td>{{ $dt->jenis_kelamin }}</td>
                                             <td>{{ $dt->ortu->nama_bapak }}</td>
                                             <td>{{ $dt->ortu->nama_ibu }}</td>
