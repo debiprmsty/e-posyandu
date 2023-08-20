@@ -60,7 +60,8 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlSelect1">Pilih Nama Dusun</label>
-                                                        <select class="form-control" name="id_dusun" id="namaDusun">
+                                                        <select class="form-control" name="id_dusun" id="namaDusun"
+                                                            required>
                                                             <option value="">Pilih Dusun</option>
                                                             @foreach ($dataDusun as $index => $dt)
                                                                 <option value="{{ $dt->id }}">{{ $dt->nama_dusun }}

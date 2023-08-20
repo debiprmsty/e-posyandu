@@ -31,7 +31,8 @@
                                             <select name="id_balita" id="id_balita" class="form-control"
                                                 style="-webkit-appearance: none;
                                         -moz-appearance: none;
-                                        appearance: none;">
+                                        appearance: none;"
+                                                required>
                                             </select>
                                             <div class="input-group-append">
                                                 <button type="button" class="input-group-text btn btn-primary text-white"
@@ -41,17 +42,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Tanggal Penimbangan:</label>
-                                        <input type="date" class="form-control" name="tgl_timbangan">
+                                        <input type="date" class="form-control" name="tgl_timbangan" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Berat Badan</label>
                                         <input type="text" class="form-control" placeholder="Masukkan tinggi badan..."
-                                            name="berat_badan" value="0">
+                                            name="berat_badan" value="0" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Tinggi Badan</label>
                                         <input type="text" class="form-control" placeholder="Masukkan berat badan..."
-                                            name="tinggi_badan" value="0">
+                                            name="tinggi_badan" value="0" required>
                                     </div>
                                     <button type="submit" class="btn btn-md m-2 btn-primary">Tambah</button>
                                 </form>
@@ -76,7 +77,8 @@
                                             <select name="id_balita" id="id_balita" class="form-control"
                                                 style="-webkit-appearance: none;
                                         -moz-appearance: none;
-                                        appearance: none;">
+                                        appearance: none;"
+                                                required>
                                                 <option value="{{ $dataBalita[0]['id'] }}">
                                                     {{ $dataBalita[0]['nama_balita'] }}</option>
                                             </select>
@@ -89,7 +91,7 @@
                                     <div class="form-group">
                                         <label>Tanggal Penimbangan:</label>
                                         <input type="date" class="form-control" name="tgl_timbangan"
-                                            value="{{ $dataBalita[0]['tgl_timbangan'] }}">
+                                            value="{{ $dataBalita[0]['tgl_timbangan'] }}" required>
                                     </div>
                                     <div class="form-group">
                                         <label>Berat Badan</label>

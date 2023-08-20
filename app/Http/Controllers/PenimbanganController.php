@@ -19,7 +19,8 @@ class PenimbanganController extends Controller
     public function index()
     {
         $data = Penimbangan::with(['dusun', 'balita', 'keterangan'])->get();
-        $dataDusun = Dusun::all();
+        $dataDusun = Dusun::has('balita')->with('balita')->get();
+
         return view('penimbangan', compact('data', 'dataDusun'));
     }
 
