@@ -51,9 +51,9 @@
 
                                     <form action="{{ route('login.proses') }}" method="POST">
                                         @csrf
-                                        <div class="d-flex align-items-center mb-3 pb-1">
+                                        <div class="d-flex align-items-center mb-2 pb-1">
                                             <img src="{{ asset('assets/img/icon.ico') }}" alt="" srcset="">
-                                            <span class="h3 fw-bold ml-2 mb-0"> E-Posyandu</span>
+                                            <span class="h3 fw-bold ml-2 mb-0"> E-Posyandu Desa Jehem</span>
                                         </div>
 
                                         <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Silahkan Login
@@ -73,7 +73,7 @@
                                         </div>
 
                                         <div class="pt-1 mb-4">
-                                            <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
                                         </div>
                                     </form>
 
