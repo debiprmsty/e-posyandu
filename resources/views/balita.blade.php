@@ -45,29 +45,31 @@
                                                     <div class="form-group">
                                                         <label for="balita">Nama Balita</label>
                                                         <input type="text" class="form-control" id="balita"
-                                                            name="nama_balita" placeholder="Masukkan Nama Balita">
+                                                            name="nama_balita" placeholder="Masukkan Nama Balita" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="tgllahir">Tanggal Lahir</label>
                                                         <input type="date" name="tanggal_lahir" class="form-control"
-                                                            id="tgllahir" placeholder="Masukkan Tangga Lahir Balita">
+                                                            id="tgllahir" placeholder="Masukkan Tangga Lahir Balita"
+                                                            required>
                                                     </div>
                                                     <div class="form-check">
                                                         <label>Jenis Kelamin</label><br />
                                                         <label class="form-radio-label">
                                                             <input class="form-radio-input" type="radio"
-                                                                name="jenis_kelamin" value="Laki-Laki">
+                                                                name="jenis_kelamin" value="Laki-Laki"required>
                                                             <span class="form-radio-sign">Laki-Laki</span>
                                                         </label>
                                                         <label class="form-radio-label ml-3">
                                                             <input class="form-radio-input" type="radio"
-                                                                name="jenis_kelamin" value="Perempuan">
+                                                                name="jenis_kelamin" value="Perempuan"required>
                                                             <span class="form-radio-sign">Perempuan</span>
                                                         </label>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlSelect1">Pilih Nama Orang Tua</label>
-                                                        <select class="form-control" name="id_orangtua" id="pilihOrtu">
+                                                        <select class="form-control" name="id_orangtua" id="pilihOrtu"
+                                                            required>
                                                             <option value="">Pilih Data Orang Tua</option>
                                                         </select>
                                                     </div>
@@ -126,7 +128,9 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $dt->nik_balita }}</td>
                                             <td>{{ $dt->nama_balita }}</td>
-                                            <td>{{ $dt->tanggal_lahir }}</td>
+                                            <td>{{ \Carbon\Carbon::parse($dt->tanggal_lahir)->formatLocalized('%d %B %Y') }}
+                                            </td>
+
                                             <td>{{ $dt->jenis_kelamin }}</td>
                                             <td>{{ $dt->ortu->nama_bapak }}</td>
                                             <td>{{ $dt->ortu->nama_ibu }}</td>

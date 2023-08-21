@@ -37,7 +37,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label for="dusun">Nama Dusun</label>
-                                                        <input type="text" class="form-control" id="dusun" name="nama_dusun" placeholder="Masukkan Nama Dusun">
+                                                        <input type="text" class="form-control" id="dusun" name="nama_dusun" placeholder="Masukkan Nama Dusun" required>
                                                     </div>
                                                 </div>
                                             </div>
