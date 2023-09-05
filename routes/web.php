@@ -22,6 +22,8 @@ use App\Http\Controllers\AuthController;
 */
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::get('/register', [AuthController::class, 'viewRegister'])->name('register');
+Route::post('/proses-register', [AuthController::class, 'register'])->name('register.proses');
 Route::post('/proses-login', [AuthController::class, 'login'])->name('login.proses');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 

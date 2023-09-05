@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Agu 2023 pada 18.48
+-- Waktu pembuatan: 05 Sep 2023 pada 15.04
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -38,13 +38,6 @@ CREATE TABLE `balitas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `balitas`
---
-
-INSERT INTO `balitas` (`id`, `id_orangtua`, `id_dusun`, `nik_balita`, `nama_balita`, `tanggal_lahir`, `jenis_kelamin`, `created_at`, `updated_at`) VALUES
-(12, 18, 7, '5106036912180002', 'I Dewa A. Ayu Sinta Ari Yanti', '2018-12-29', 'Perempuan', '2023-08-19 23:23:30', '2023-08-19 23:23:30');
 
 -- --------------------------------------------------------
 
@@ -89,26 +82,6 @@ CREATE TABLE `dusuns` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `dusuns`
---
-
-INSERT INTO `dusuns` (`id`, `nama_dusun`, `created_at`, `updated_at`) VALUES
-(2, 'Dusun Galiran', '2023-08-08 00:34:59', '2023-08-08 00:34:59'),
-(5, 'Dusun Jehem Kaja', '2023-08-08 04:32:25', '2023-08-08 20:51:51'),
-(6, 'Dusun Jehem Kelod', '2023-08-08 04:32:32', '2023-08-08 04:32:32'),
-(7, 'Dusun Kaulan Dewa', '2023-08-08 04:32:49', '2023-08-09 04:57:29'),
-(11, 'Dusun Kelempung', '2023-08-08 17:42:05', '2023-08-08 17:42:05'),
-(14, 'Dusun Sama Griya', '2023-08-08 20:52:26', '2023-08-08 20:52:26'),
-(15, 'Dusun Sama Undisan', '2023-08-08 20:52:51', '2023-08-08 20:52:51'),
-(16, 'Dusun Tingkad Batu', '2023-08-08 20:53:10', '2023-08-08 20:53:10'),
-(18, 'Dusun Pasekan', '2023-08-08 20:53:23', '2023-08-08 20:53:23'),
-(20, 'Dusun Tambahan Bakas', '2023-08-08 20:55:13', '2023-08-08 20:55:13'),
-(21, 'Dusun Tambahan Kelod', '2023-08-08 20:55:24', '2023-08-08 20:55:24'),
-(22, 'Dusun Tambahan Tengah', '2023-08-08 22:35:50', '2023-08-08 22:35:50'),
-(23, 'Dusun Antugan', '2023-08-09 04:57:19', '2023-08-09 04:57:19'),
-(24, 'Dusun Pembungan', '2023-08-19 21:31:29', '2023-08-19 21:31:29');
 
 -- --------------------------------------------------------
 
@@ -196,17 +169,6 @@ CREATE TABLE `orang_tuas` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data untuk tabel `orang_tuas`
---
-
-INSERT INTO `orang_tuas` (`id`, `id_dusun`, `nik_bapak`, `nik_ibu`, `nama_bapak`, `nama_ibu`, `created_at`, `updated_at`) VALUES
-(13, 11, '0', '0', 'Putu Agastia', 'Made Sri Yuliantari', '2023-08-19 22:54:33', '2023-08-19 22:54:33'),
-(14, 14, '0', '0', 'Putu Darmayasa', 'Alit Juita Santi', '2023-08-19 22:55:49', '2023-08-19 22:55:49'),
-(15, 20, '0', '0', 'Dewa Agung Gede Putra', 'Kadek Sulasih', '2023-08-19 22:57:11', '2023-08-19 22:57:11'),
-(16, 6, '0', '510603560882001', NULL, 'Ni Kadek Rusmini', '2023-08-19 23:08:15', '2023-08-19 23:08:15'),
-(18, 7, '0', '0', NULL, 'Dewa Ayu Okta Diantini', '2023-08-19 23:21:34', '2023-08-19 23:21:34');
-
 -- --------------------------------------------------------
 
 --
@@ -236,13 +198,6 @@ CREATE TABLE `penimbangans` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `penimbangans`
---
-
-INSERT INTO `penimbangans` (`id`, `id_balita`, `id_dusun`, `id_keterangan`, `tgl_timbangan`, `berat_badan`, `tinggi_badan`, `created_at`, `updated_at`) VALUES
-(49, 12, 7, 4, '2023-08-10', 13.9, 102.6, '2023-08-19 23:42:08', '2023-08-19 23:42:08');
 
 -- --------------------------------------------------------
 
@@ -279,6 +234,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(3, 'User', 'user@gmail.com', NULL, '$2y$10$BS.TOiZf.jS4RiotsfC6RO07RR2CTrE2rJDTrtO0/YWxMdiWb.Ipy', NULL, '2023-09-05 19:58:38', '2023-09-05 19:58:38');
 
 --
 -- Indexes for dumped tables
@@ -368,7 +330,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `balitas`
 --
 ALTER TABLE `balitas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `bulans`
@@ -380,7 +342,7 @@ ALTER TABLE `bulans`
 -- AUTO_INCREMENT untuk tabel `dusuns`
 --
 ALTER TABLE `dusuns`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -404,13 +366,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `orang_tuas`
 --
 ALTER TABLE `orang_tuas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT untuk tabel `penimbangans`
 --
 ALTER TABLE `penimbangans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -422,7 +384,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

@@ -32,7 +32,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('balita.tambah') }}" method="POST">
+                                        <form id="addData" action="{{ route('balita.tambah') }}" method="POST">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -44,14 +44,16 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="balita">Nama Balita</label>
-                                                        <input type="text" class="form-control" id="balita"
+                                                        <input type="text" class="form-control" id="namabalita"
                                                             name="nama_balita" placeholder="Masukkan Nama Balita" required>
+                                                        <small class="text-danger font-italic" id="namaBalitaError"></small>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="tgllahir">Tanggal Lahir</label>
                                                         <input type="date" name="tanggal_lahir" class="form-control"
                                                             id="tgllahir" placeholder="Masukkan Tangga Lahir Balita"
                                                             required>
+                                                        <small class="text-danger font-italic" id="tglBalitaError"></small>
                                                     </div>
                                                     <div class="form-check">
                                                         <label>Jenis Kelamin</label><br />
@@ -72,6 +74,7 @@
                                                             required>
                                                             <option value="">Pilih Data Orang Tua</option>
                                                         </select>
+                                                        <small class="text-danger font-italic" id="ortuBalitaError"></small>
                                                     </div>
                                                     <div class="form-group", style="margin-top: -20px;">
                                                         <input type="hidden" name="id_dusun" class="form-control"
@@ -86,7 +89,7 @@
                                             </div>
                                     </div>
                                     <div class="modal-footer no-bd">
-                                        <button type="submit" class="btn btn-primary">Tambah</button>
+                                        <button class="btn btn-primary tambah-data">Tambah</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                                     </div>
                                     </form>
@@ -256,6 +259,40 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            var namaBalita = $("#addData #namabalita");
+            var tglLahir = $("#addData #tgllahir");
+            var pilihOrtu = $("#addData #pilihOrtu");
+            var namaBalitaError = $("#addData #namaBalitaError");
+            var tglLahirError = $("#addData #tglBalitaError");
+            var ortuError = $("#addData #ortuBalitaError");
+
+            $(namaBalita).on('keyup', function() {
+                namaBalitaError.text('');
+            });
+            $(tglLahir).on('input', function() {
+                tglLahirError.text('');
+            });
+            $(pilihOrtu).on('input', function() {
+                ortuError.text('');
+            });
+
+            $(".tambah-data").click(function(e) {
+                e.preventDefault();
+
+                console.log(namaBalita.val());
+
+                if (!namaBalita.val()) {
+                    namaBalitaError.text("Nama Balita wajib diisi");
+                } else if (tglLahir.val().length == 0) {
+                    tglLahirError.text("Tanggal Lahir wajib diisi");
+                } else if (!pilihOrtu.val()) {
+                    ortuError.text("Silahkan pilih orang tua balita");
+                } else {
+                    $("#addData").submit();
+                }
+
+            });
 
             $('.tambah-balita').click(function() {
                 $.ajax({

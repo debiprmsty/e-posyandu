@@ -18,8 +18,8 @@ Circles.create({
 //Notify
 $.notify({
 	icon: 'flaticon-alarm-1',
-	title: 'E-Posyandu Jehem',
-	message: 'Selamat Datang di Sistem Posyandu Digital Desa Jehem',
+	title: 'Posyandu Care',
+	message: 'Selamat Datang di Sistem Posyandu Digital',
 },{
 	type: 'info',
 	placement: {

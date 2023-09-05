@@ -32,7 +32,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('ortu.tambah') }}" method="POST">
+                                        <form id="tambahData" action="{{ route('ortu.tambah') }}" method="POST">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-12">
@@ -41,22 +41,26 @@
                                                         <input type="number" min="0" class="form-control"
                                                             id="nikbapak" name="nik_bapak" placeholder="Masukkan NIK Bapak"
                                                             value="0">
+                                                        <small class="text-danger font-italic" id="nikBapakError"></small>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="nikibu">NIK Ibu</label>
                                                         <input type="number" name="nik_ibu" min="0"
                                                             class="form-control" id="nikibu"
                                                             placeholder="Masukkan NIK Ibu" value="0">
+                                                        <small class="text-danger font-italic" id="nikIbuError"></small>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="bapak">Nama Bapak</label>
                                                         <input type="text" name="nama_bapak" class="form-control"
-                                                            id="bapak" placeholder="Masukkan Nama Bapak" value="">
+                                                            id="namabapak" placeholder="Masukkan Nama Bapak" value="">
+                                                        <small class="text-danger font-italic" id="namaBapakError"></small>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="ibu">Nama Ibu</label>
                                                         <input type="text" name="nama_ibu" class="form-control"
-                                                            id="ibu" placeholder="Masukkan Nama Ibu" value="">
+                                                            id="namaibu" placeholder="Masukkan Nama Ibu" value="">
+                                                        <small class="text-danger font-italic" id="namaIbuError"></small>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleFormControlSelect1">Pilih Nama Dusun</label>
@@ -68,14 +72,14 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-
+                                                        <small class="text-danger font-italic" id="namaDusunError"></small>
                                                     </div>
                                                 </div>
                                             </div>
 
                                     </div>
                                     <div class="modal-footer no-bd">
-                                        <button type="submit" class="btn btn-primary">Tambah</button>
+                                        <button class="btn btn-primary tambah-data">Tambah</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                                     </div>
                                     </form>
@@ -216,6 +220,28 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            var namaDusun = $("#tambahData #namaDusun");
+            var namaDusunError = $("#tambahData #namaDusunError");
+
+            $(namaDusun).on('input', function() {
+                namaDusunError.text('');
+            });
+
+            $(".tambah-data").click(function(e) {
+                e.preventDefault();
+
+                if (!namaDusun.val()) {
+                    namaDusunError.text('Nama Dusun wajib diiisi')
+                } else {
+                    namaDusunError.text('');
+                    $("#tambahData").submit();
+                }
+
+            });
+
+
+
             $('.edit-ortu').click(function() {
                 var dataId = $(this).data("id");
                 var namaBapak = $(this).data("nb");

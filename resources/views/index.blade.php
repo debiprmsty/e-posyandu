@@ -4,7 +4,7 @@
         <div class="page-inner py-5">
             <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
                 <div>
-                    <h2 class="text-white pb-2 fw-bold">Selamat Datang di E-Posyandu Desa Jehem !</h2>
+                    <h2 class="text-white pb-2 fw-bold">Selamat Datang di Posyandu Care !</h2>
                     <h5 class="text-white op-7 mb-2">Sistem Posyandu Digital</h5>
                 </div>
             </div>
@@ -78,11 +78,11 @@
             <div class="col-md-4">
                 <div class="card card-primary card-annoucement card-round" style="min-height: 538px">
                     <div class="card-body">
-                        <div class="card-opening text-center">Tentang E-Posyandu,</div>
+                        <div class="card-opening text-center">Tentang Posyandu Care,</div>
                         <div class="card-desc text-justify">
-                            E-Posyandu adalah Sistem Pos Pelayanan Terpadu berbasis digital yang digunakan sebagai
+                            Posyandu Care adalah Sistem Pos Pelayanan Terpadu berbasis digital yang digunakan sebagai
                             pencatatan hasil penimbangan balita, baik tinggi badan maupun berat badan.
-                            E-Posyandu dilengkapi dengan fitur-fitur diantaranya, <b>Pencatatan</b>, melakukan pencatatan
+                            Posyandu Care dilengkapi dengan fitur-fitur diantaranya, <b>Pencatatan</b>, melakukan pencatatan
                             data dusun, orang tua, balita, dan penimbangan balita. <b>Pencarian</b>, melakukan pencarian
                             secara otomatis dengan beragam kategori pencarian dan <b>Pelaporan</b>, melakukan pelaporan
                             bulanan dan tahunan, maupun rata rata tinggi dan berat badan di setiap dusun secara otomatis.

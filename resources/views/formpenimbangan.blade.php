@@ -39,22 +39,29 @@
                                                     data-toggle="modal" data-target="#pilihBalita">Pilih Balita</button>
                                             </div>
                                         </div>
+                                        <small class="text-danger font-italic" id="pilihBalitaError"></small>
                                     </div>
                                     <div class="form-group">
                                         <label>Tanggal Penimbangan:</label>
-                                        <input type="date" class="form-control" name="tgl_timbangan" required>
+                                        <input type="date" id="tglTimbangan" class="form-control" name="tgl_timbangan"
+                                            required>
+                                        <small class="text-danger font-italic" id="tglError"></small>
                                     </div>
                                     <div class="form-group">
                                         <label>Berat Badan</label>
-                                        <input type="text" class="form-control" placeholder="Masukkan tinggi badan..."
-                                            name="berat_badan" value="0" required>
+                                        <input type="text" id="bb" class="form-control"
+                                            placeholder="Masukkan tinggi badan..." name="berat_badan" value="0"
+                                            required>
+                                        <small class="text-danger font-italic" id="bbError"></small>
                                     </div>
                                     <div class="form-group">
                                         <label>Tinggi Badan</label>
-                                        <input type="text" class="form-control" placeholder="Masukkan berat badan..."
-                                            name="tinggi_badan" value="0" required>
+                                        <input type="text" id="tb" class="form-control"
+                                            placeholder="Masukkan berat badan..." name="tinggi_badan" value="0"
+                                            required>
+                                        <small class="text-danger font-italic" id="tbError"></small>
                                     </div>
-                                    <button type="submit" class="btn btn-md m-2 btn-primary">Tambah</button>
+                                    <button class="btn btn-md m-2 btn-primary tambah-data">Tambah</button>
                                 </form>
                             @elseif ($isAdd == false)
                                 <form action="{{ route('form.update') }}" id="form-balita" method="POST">
@@ -174,6 +181,36 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
+
+            var idBalita = $("#form-balita #id_balita");
+            var tglTimbangan = $("#form-balita #tglTimbangan");
+            var beratBadan = $("#form-balita #bb");
+            var tinggiBadan = $("#form-balita #tb");
+            var pilihBalitaError = $("#form-balita #pilihBalitaError");
+            var tglError = $("#form-balita #tglError");
+            var bbError = $("#form-balita #bbError");
+            var tbError = $("#form-balita #tbError");
+
+            $(idBalita).on('input', function() {
+                pilihBalitaError.text("");
+            });
+
+            $(tglTimbangan).on('input', function() {
+                tglError.text("");
+            });
+
+            $('.tambah-data').on('click', function(e) {
+                e.preventDefault();
+
+                if (!idBalita.val()) {
+                    pilihBalitaError.text('Silahkan pilih balita yang ingin ditimbang');
+                } else if (!tglTimbangan.val()) {
+                    tglError.text('Tanggal timbangan wajib diisi');
+                } else {
+                    $("#form-balita").submit();
+                }
+            });
+
             $('.pilih-balita').click(function() {
                 var namaBalita = $(this).data('nama');
                 var idBalita = $(this).data('id');

@@ -24,36 +24,38 @@
                                     <div class="modal-header no-bd">
                                         <h3 class="modal-title">
                                             <span class="fw-bold">
-                                            Tambah Data Dusun</span> 
+                                                Tambah Data Dusun</span>
                                         </h3>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="{{ route('dusun.tambah') }}" method="POST">
+                                        <form id="addData" action="{{ route('dusun.tambah') }}" method="POST">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label for="dusun">Nama Dusun</label>
-                                                        <input type="text" class="form-control" id="dusun" name="nama_dusun" placeholder="Masukkan Nama Dusun" required>
+                                                        <input type="text" class="form-control" id="namaDusun"
+                                                            name="nama_dusun" placeholder="Masukkan Nama Dusun">
+                                                        <small class="text-danger font-italic" id="namaDusunError"></small>
                                                     </div>
                                                 </div>
                                             </div>
-                                       
+
                                     </div>
                                     <div class="modal-footer no-bd">
-                                        <button type="submit" class="btn btn-primary">Tambah</button>
+                                        <button class="btn btn-primary tambah-data">Tambah</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                                     </div>
-                                </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
 
                         <div class="table-responsive">
-                            <table id="add-row" class="display table table-striped table-hover" >
+                            <table id="add-row" class="display table table-striped table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center">Nomor</th>
@@ -70,45 +72,44 @@
                                 </tfoot>
                                 <tbody>
                                     @foreach ($data as $index => $dusun)
-                                    <tr>
-                                        <td class="text-center">{{ $index + 1 }}</td>
-                                        <td>{{ $dusun->nama_dusun }}</td>
-                                        <td>
-                                            <div class="form-button-action">
-                                                <button type="button" class="btn btn-link btn-primary edit-button" 
-                                                data-toggle="modal" data-target="#editRowModal"
-                                                data-nama="{{ $dusun->nama_dusun }}"
-                                                data-id="{{ $dusun->id }}"
-                                                data-dusun="{{ json_encode($dusun) }}"
-                                                >
-                                                    <span class="btn-label">
-                                                        <i class="fa fa-edit"></i>
-                                                    </span>
-                                                    Edit
-                                                </button>
-                                                <button type="button" data-id="{{ $dusun->id }}" class="btn btn-link btn-danger hapus-dusun">
-                                                    <span class="btn-label">
-                                                        <i class="fa fa-trash"></i>
-                                                    </span>
-                                                    Hapus
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        <tr>
+                                            <td class="text-center">{{ $index + 1 }}</td>
+                                            <td>{{ $dusun->nama_dusun }}</td>
+                                            <td>
+                                                <div class="form-button-action">
+                                                    <button type="button" class="btn btn-link btn-primary edit-button"
+                                                        data-toggle="modal" data-target="#editRowModal"
+                                                        data-nama="{{ $dusun->nama_dusun }}" data-id="{{ $dusun->id }}"
+                                                        data-dusun="{{ json_encode($dusun) }}">
+                                                        <span class="btn-label">
+                                                            <i class="fa fa-edit"></i>
+                                                        </span>
+                                                        Edit
+                                                    </button>
+                                                    <button type="button" data-id="{{ $dusun->id }}"
+                                                        class="btn btn-link btn-danger hapus-dusun">
+                                                        <span class="btn-label">
+                                                            <i class="fa fa-trash"></i>
+                                                        </span>
+                                                        Hapus
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                     <!-- Modal Edit -->
-                     <div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <!-- Modal Edit -->
+                    <div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header no-bd">
                                     <h3 class="modal-title">
                                         <span class="fw-bold">
-                                        Edit Data Dusun</span> 
+                                            Edit Data Dusun</span>
                                     </h3>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -120,19 +121,21 @@
                                         <div class="row" id="data-dusun">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <input type="hidden" class="form-control" id="id-dusun" name="id_dusun" placeholder="Masukkan Nama Dusun">
+                                                    <input type="hidden" class="form-control" id="id-dusun"
+                                                        name="id_dusun" placeholder="Masukkan Nama Dusun">
                                                     <label for="dusun">Nama Dusun</label>
-                                                    <input type="text" class="form-control" id="nama-dusun" name="nama_dusun" placeholder="Masukkan Nama Dusun">
+                                                    <input type="text" class="form-control" id="nama-dusun"
+                                                        name="nama_dusun" placeholder="Masukkan Nama Dusun">
                                                 </div>
                                             </div>
                                         </div>
-                                   
+
                                 </div>
                                 <div class="modal-footer no-bd">
                                     <button type="submit" class="btn btn-primary">Edit</button>
                                     <button type="button" class="btn btn-danger" data-dismiss="modal">Batal</button>
                                 </div>
-                            </form>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -149,50 +152,70 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    
-    $(document).ready(function() {
-        $('.edit-button').click(function() {
-            var namaDusun = $(this).data('nama');
-            var idDusun = $(this).data('id');
+        $(document).ready(function() {
 
-            $('#id-dusun').val(idDusun);
-            $('#nama-dusun').val(namaDusun);
-            
-        });
 
-        $('.hapus-dusun').click(function() {
-            var dusunId = $(this).data('id');
+            $('#namaDusun').on('keyup', function() {
+                $('#namaDusunError').text('');
+            });
 
-            swal({
-                title: 'Hapus Data Dusun!',
-                text: "Anda yakin ingin menghapus data ini ?",
-                type: 'warning',
-                buttons: {
-                    confirm: {
-                        text : 'Iya, hapus!',
-                        className : 'btn btn-success'
-                    },
-                    cancel: {
-                        text : 'Batal',
-                        visible: true,
-                        className: 'btn btn-danger'
-                    }
-                }
-            }).then((Delete) => {
-                if (Delete) {
-                    // Redirect ke URL penghapusan dengan parameter ID
-                    window.location.href = '/dusun/delete/' + dusunId;
+            $('.tambah-data').click(function(e) {
+                e.preventDefault();
+                var form = $('#addData');
+                var nama_dusun = $('#namaDusun');
+                var dusunError = $('#namaDusunError');
+
+                if (!nama_dusun.val().trim()) {
+                    dusunError.addClass('mt-3');
+                    dusunError.text('Nama dusun tidak boleh kosong');
                 } else {
-                    swal.close();
+                    dusunError.text('');
+                    form.submit();
                 }
             });
-        })
 
-    });
+            $('.edit-button').click(function() {
+                var namaDusun = $(this).data('nama');
+                var idDusun = $(this).data('id');
 
-    // Notif cantik2
-    @if (session('success'))
-        swal({
+                $('#id-dusun').val(idDusun);
+                $('#nama-dusun').val(namaDusun);
+
+            });
+
+            $('.hapus-dusun').click(function() {
+                var dusunId = $(this).data('id');
+
+                swal({
+                    title: 'Hapus Data Dusun!',
+                    text: "Anda yakin ingin menghapus data ini ?",
+                    type: 'warning',
+                    buttons: {
+                        confirm: {
+                            text: 'Iya, hapus!',
+                            className: 'btn btn-success'
+                        },
+                        cancel: {
+                            text: 'Batal',
+                            visible: true,
+                            className: 'btn btn-danger'
+                        }
+                    }
+                }).then((Delete) => {
+                    if (Delete) {
+                        // Redirect ke URL penghapusan dengan parameter ID
+                        window.location.href = '/dusun/delete/' + dusunId;
+                    } else {
+                        swal.close();
+                    }
+                });
+            })
+
+        });
+
+        // Notif cantik2
+        @if (session('success'))
+            swal({
                 title: "Sukses",
                 text: '{{ session('success') }}',
                 icon: "success",
@@ -206,8 +229,6 @@
                     }
                 }
             });
-    @endif
-
+        @endif
     </script>
-
 @endsection

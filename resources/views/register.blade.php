@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login Posyandu Care</title>
+    <title>Register Posyandu Care</title>
     <link rel="icon" href="{{ asset('assets/img/logo-fix.png') }}" type="image/x-icon" />
 
     <!-- Fonts and icons -->
@@ -43,23 +43,29 @@
                     <div class="card" style="border-radius: 1rem;">
                         <div class="row g-0">
                             <div class="col-md-6 col-lg-6 d-none d-md-block">
-                                <img src="{{ asset('assets/img/posyandu.jpg') }}" alt="login form" class="img-fluid"
+                                <img src="{{ asset('assets/img/register.jpg') }}" alt="login form" class="img-fluid"
                                     style="border-radius: 1rem 0 0 1rem; height:90%" />
                             </div>
                             <div class="col-md-6 col-lg-6 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
 
-                                    <form action="{{ route('login.proses') }}" method="POST">
+                                    <form action="{{ route('register.proses') }}" method="POST">
                                         @csrf
                                         <div class="d-flex align-items-center mb-3 pb-1">
                                             <img src="{{ asset('assets/img/logo-fix.png') }}" alt=""
                                                 srcset="" style="height: 35px; width:35px; border-radius: 50%">
-                                            <span class="h3 fw-bold ml-2 mb-0">Posyandu Care</span>
+                                            <span class="h3 fw-bold ml-2 mb-0"> Posyandu Care</span>
                                         </div>
 
-                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Silahkan Login
+                                        <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Silahkan Daftar
+                                            Akun
                                             Terlebih dahulu</h5>
 
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="form2Example17"
+                                                class="form-control form-control-lg" name="name" required />
+                                            <label class="form-label" for="form2Example17">Username</label>
+                                        </div>
                                         <div class="form-outline mb-4">
                                             <input type="email" id="form2Example17"
                                                 class="form-control form-control-lg" name="email" required />
@@ -75,14 +81,14 @@
 
                                         <div class="pt-1 mb-4">
                                             <button style="background-color: #408E91"
-                                                class="text-white btn btn-lg btn-block" type="submit">Login</button>
+                                                class="btn btn-lg btn-block text-white" type="submit">Daftar</button>
                                         </div>
                                     </form>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <p class="mt-3">
-                                            Belum memilki akun ?
-                                            <a style="color: #245953;" href="{{ route('register') }}"
-                                                class=" fw-bold">Register</a>
+                                            Sudah memilki akun ?
+                                            <a style="color: #245953;" href="{{ route('login') }}"
+                                                class=" fw-bold">Login</a>
                                         </p>
                                     </div>
                                 </div>
