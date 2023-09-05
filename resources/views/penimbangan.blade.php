@@ -42,12 +42,12 @@
                                 </button>
                                 <button data-toggle="modal" data-target="#exportModal"
                                     class="btn btn-success btn-round btn-sm d-block d-md-none ml-2">
-                                    <i class="fa fa-file-text mr-2"></i>
+                                    <i class="fa fa-file-export"></i>
                                     Export Excel
                                 </button>
                                 <button data-toggle="modal" data-target="#exportModal"
                                     class="btn btn-success btn-round btn-md d-none d-md-block ml-2">
-                                    <i class="fa fa-file-text mr-2"></i>
+                                    <i class="fa fa-file-export"></i>
                                     Export Excel
                                 </button>
                             </div>
@@ -141,7 +141,7 @@
                                     <label for="exampleFormControlSelect1">Pilih Nama Dusun</label>
                                     <select class="form-control" name="id_dusun" id="namaDusun">
                                         <option value="" disabled>Pilih Dusun</option>
-                                        <option value="0" class="fw-bold">Semua Dusun</option>
+                                        {{-- <option value="0" class="fw-bold">Semua Dusun</option> --}}
                                         @foreach ($dataDusun as $index => $dt)
                                             <option value="{{ $dt->id }}">{{ $dt->nama_dusun }}</option>
                                         @endforeach
@@ -181,7 +181,7 @@
                                     <label for="exampleFormControlSelect1">Pilih Nama Dusun</label>
                                     <select class="form-control" name="id_dusun" id="namaDusun">
                                         <option value="" disabled>Pilih Dusun</option>
-                                        <option value="0" class="fw-bold">Semua Dusun</option>
+                                        {{-- <option value="0" class="fw-bold">Semua Dusun</option> --}}
                                         @foreach ($dataDusun as $index => $dt)
                                             <option value="{{ $dt->id }}">{{ $dt->nama_dusun }}</option>
                                         @endforeach

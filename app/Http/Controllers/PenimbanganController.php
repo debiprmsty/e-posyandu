@@ -20,7 +20,6 @@ class PenimbanganController extends Controller
     {
         $data = Penimbangan::with(['dusun', 'balita', 'keterangan'])->get();
         $dataDusun = Dusun::has('balita')->with('balita')->get();
-
         return view('penimbangan', compact('data', 'dataDusun'));
     }
 
